@@ -16,8 +16,8 @@ import drone.mock.UrbanizationMatrix;
 public class TestHelper {
     
     
-    public IDealistaAPI getIdealistaAPI(int row, int col) throws NodeAlreadyAddedAsAdjacent, DuplicatedAdjacentNode, NodeAlreadyAdded, NodeNotFound {
-        IDealistaAPI idApi = createUBMatrix(row, col);
+    public IDealistaAPI getIdealistaAPI(int col,int row) throws NodeAlreadyAddedAsAdjacent, DuplicatedAdjacentNode, NodeAlreadyAdded, NodeNotFound {
+        IDealistaAPI idApi = createUBMatrix(row,col);
         return idApi;
     }
     
