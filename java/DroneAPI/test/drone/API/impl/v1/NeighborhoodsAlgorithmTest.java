@@ -1,4 +1,4 @@
-package testid.idgraph.API.impl.v1;
+package drone.API.impl.v1;
 
 import drone.API.impl.v1.NeighborhoodsAlgorithm;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import test.id.helper.TestHelper;
+import drone.test.helper.TestHelper;
 import drone.API.IDealistaAPI;
 import drone.API.INeighborhoodsAlgorithm;
 import drone.API.ITestDroneAPI;

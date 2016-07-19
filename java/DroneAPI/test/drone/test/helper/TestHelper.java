@@ -1,4 +1,4 @@
-package test.id.helper;
+package drone.test.helper;
 
 import drone.API.IDealistaAPI;
 import drone.API.exception.DuplicatedAdjacentNode;
