@@ -111,8 +111,10 @@ public class Node {
             catch (NodeNotFound ex1){
                 throw new NoAdjacentNode();
             }
-        } catch (NodeNotFound | DirectionNotFound ex) {
+        } catch (DirectionNotFound ex) {
             throw new NeighborhoodsAlgorithmEx("Oops. something went wrong");
+        }catch (NodeNotFound ex2 ) {
+            throw new NoAdjacentNode();
         }
 
     }
@@ -154,8 +156,10 @@ public class Node {
             } catch (NodeNotFound | DirectionNotFound ex1) {
                 throw new NeighborhoodsAlgorithmEx("Oops. something went wrong");
             }
-        } catch (NodeNotFound | DirectionNotFound ex) {
+        } catch (DirectionNotFound ex) {
             throw new NeighborhoodsAlgorithmEx("Oops. something went wrong");
+        }catch(NodeNotFound ex2){
+            throw new NoAdjacentNode();
         }
 
     }

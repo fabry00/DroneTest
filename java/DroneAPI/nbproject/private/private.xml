@@ -28,10 +28,6 @@
             <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/NeighborhoodsAlgorithm.java</file>
             <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/direction/RightDirection.java</file>
         </group>
-        <group name="DroneTest">
-            <file>file:/F:/Projects/Java/DroneTest/testID/src/testid/idgraph/API/impl/TestDroneAPI.java</file>
-            <file>file:/F:/Projects/Java/DroneTest/testID/src/testid/idgraph/API/impl/v1/NeighborhoodsAlgorithm.java</file>
-            <file>file:/F:/Projects/Java/DroneTest/testID/test/testid/idgraph/API/impl/v1/NeighborhoodsAlgorithmTest.java</file>
-        </group>
+        <group name="DroneTest"/>
     </open-files>
 </project-private>

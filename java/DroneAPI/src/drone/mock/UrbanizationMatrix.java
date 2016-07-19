@@ -62,7 +62,7 @@ public class UrbanizationMatrix implements IDealistaAPI {
         
         Node sourceNode = nodes.get(id);
         Coord coordAdjacent 
-                = direction.getAdjacentCoord(sourceNode.getCoord(), row, col);
+                = direction.getAdjacentCoord(sourceNode.getCoord(), col, row);
         
         return getNodeWithCoord(coordAdjacent).getId();
     }

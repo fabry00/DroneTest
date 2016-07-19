@@ -20,6 +20,7 @@ public class Neighborhoods {
 
     private static final Logger logger = Logger.getLogger(Neighborhoods.class.getName());
 
+    
     public enum NodeType {
 
         NORTHERN_WEST, SOUTHERN_WEST, SOUTHERN_EST, NORTHERN_EST
@@ -82,15 +83,19 @@ public class Neighborhoods {
     public Neighborhoods calculateParentNeighborhoods(IDealistaAPI api,
             ScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
 
-        Map<NodeType, Node> parentCardianlNodes = retreiveParentNeighborhoodsLimits();
-        List<Node> parentNodes = getParentNeighborhoodNodes(api, scandDirection, parentCardianlNodes);
+        Map<NodeType, Node> parentCardinalNodes = retreiveParentNeighborhoodsLimits();
+        if (!areValidLimits(parentCardinalNodes)) {
+            return retrieveValidNeighbors(api, scandDirection);
+        } else {
+            List<Node> parentNodes = getParentNeighborhoodNodes(api, scandDirection, parentCardinalNodes);
 
-        return new Neighborhoods(parentCardianlNodes.get(NodeType.NORTHERN_WEST),
-                parentCardianlNodes.get(NodeType.NORTHERN_EST),
-                parentCardianlNodes.get(NodeType.SOUTHERN_WEST),
-                parentCardianlNodes.get(NodeType.SOUTHERN_EST),
-                centraltNode,
-                parentNodes);
+            return new Neighborhoods(parentCardinalNodes.get(NodeType.NORTHERN_WEST),
+                    parentCardinalNodes.get(NodeType.NORTHERN_EST),
+                    parentCardinalNodes.get(NodeType.SOUTHERN_WEST),
+                    parentCardinalNodes.get(NodeType.SOUTHERN_EST),
+                    centraltNode,
+                    parentNodes);
+        }
 
     }
 
@@ -204,16 +209,7 @@ public class Neighborhoods {
             }
 
             currentDir = scandDirection.getNext(currentDir);
-
             limitNode = getLimitNode(i + 1, scandDirection, parentCardianlNodes);
-            /*if (lasLimitNode == null && limitNode != null && currentNode != null) {
-                try {
-                    currentNode = new Node(api.getAdjacent(currentNode.getId(), prevDir), api);
-                } catch (NoAdjacentNode | NodeNotFound | DirectionNotFound ex) {
-                    Logger.getLogger(Neighborhoods.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }*/
-
         }
         // Start node inserted two time, remove the last
         if (neighborhoodNodes.get(0).equals(neighborhoodNodes.get(neighborhoodNodes.size() - 1))) {
@@ -248,19 +244,6 @@ public class Neighborhoods {
         return null;
     }
 
-    private Node getInitialLimitNode(ScanDirection scandDirection,
-            Map<NodeType, Node> parentCardianlNodes) {
-
-        NodeType type;
-        if (scandDirection.equals(ScanDirection.CLOCKWISE)) {
-            type = clockWiseOrdered.get(1);
-        } else {
-            type = clockWiseOrdered.get(clockWiseOrdered.size() - 1);
-        }
-
-        return parentCardianlNodes.get(type);
-    }
-
     private int getStartIndex(DirectionID currentDir, ScanDirection scandDirection) {
         int i = 0;
         for (DirectionID dir : scandDirection.getList()) {
@@ -290,32 +273,60 @@ public class Neighborhoods {
         return newLimitNode;
     }
 
-    private Node getLimitNode(Node current, ScanDirection scandDirection,
-            Map<NodeType, Node> parentCardianlNodes) {
-
-        NodeType nodeType = null;
-        for (Entry<NodeType, Node> entry : parentCardianlNodes.entrySet()) {
-            if (entry.getValue() != null && entry.getValue().equals(current)) {
-                nodeType = entry.getKey();
-                break;
+    private boolean areValidLimits(Map<NodeType, Node> parentCardinalNodes) {
+        for(Entry<NodeType, Node> entry : parentCardinalNodes.entrySet()){
+            if(entry.getValue() != null){
+                return true;
             }
         }
-        Node newLimitNode = null;
-        if (nodeType != null) {
-            int index;
-            if (scandDirection.equals(ScanDirection.CLOCKWISE)) {
-                index = (clockWiseOrdered.indexOf(nodeType)
-                        == clockWiseOrdered.size() - 1) ? 0 : clockWiseOrdered.indexOf(nodeType) + 1;
-
-            } else {
-                index = (clockWiseOrdered.indexOf(nodeType) == 0)
-                        ? clockWiseOrdered.size() - 1 : clockWiseOrdered.indexOf(nodeType) - 1;
-            }
-            NodeType nextCardinalLimit = clockWiseOrdered.get(index);
-            newLimitNode = parentCardianlNodes.get(nextCardinalLimit);
-        }
-
-        return newLimitNode;
+        return true;
     }
+    
+    private Neighborhoods retrieveValidNeighbors(IDealistaAPI api, ScanDirection scandDirection) {
+        //Try to get the Neighborhoods using only the base direction functions
+        List<Node> nodes = new ArrayList<>();
+        Node northernWest = null;
+        Node northernEst = null;
+        Node southernEst = null;
+        Node southernWest = null;
+        
+        try {
+            IUrbanizationID neighbor = api.getAdjacent(centraltNode, DirectionID.UP);
+            northernWest = new Node(neighbor, api);
+            nodes.add(northernWest);
+        } catch (NoAdjacentNode | NodeNotFound | DirectionNotFound ex) {
+            
+        }
+        try {
+            IUrbanizationID neighbor = api.getAdjacent(centraltNode, DirectionID.RIGHT);
+            northernEst = new Node(neighbor, api);
+            nodes.add(northernEst);
+        } catch (NoAdjacentNode | NodeNotFound | DirectionNotFound ex) {
+            
+        }
+        try {
+            IUrbanizationID neighbor = api.getAdjacent(centraltNode, DirectionID.DOWN);
+            southernEst = new Node(neighbor, api);
+            nodes.add(southernEst);
+        } catch (NoAdjacentNode | NodeNotFound | DirectionNotFound ex) {
+            
+        }
+        try {
+            IUrbanizationID neighbor = api.getAdjacent(centraltNode, DirectionID.LEFT);
+            southernWest = new Node(neighbor, api);
+             nodes.add(southernWest);
+        } catch (NoAdjacentNode | NodeNotFound | DirectionNotFound ex) {
+            
+        }
+        
+        
+        return new Neighborhoods(northernWest,
+                    northernEst,
+                    southernWest,
+                    southernEst,
+                    centraltNode,
+                    nodes);
+    }
+
 
 }

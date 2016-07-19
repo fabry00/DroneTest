@@ -599,6 +599,7 @@ public class NeighborhoodsAlgorithmTest {
         assertEquals(expected, actual);
     }
     
+    
     @Test
     /**
      * InputNode (0,0) range: 1
