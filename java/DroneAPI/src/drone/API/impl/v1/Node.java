@@ -29,6 +29,14 @@ public class Node {
         try {
             IUrbanizationID up = this.api.getAdjacent(this.id, DirectionID.UP);
             return new Node(this.api.getAdjacent(up, DirectionID.LEFT), this.api);
+        } catch (NoAdjacentNode ex) {
+            try {
+                IUrbanizationID up = this.api.getAdjacent(this.id, DirectionID.UP);
+                return new Node(up, this.api);
+
+            } catch (NodeNotFound | DirectionNotFound ex1) {
+                throw new NeighborhoodsAlgorithmEx("Oops. something went wrong");
+            }
         } catch (DirectionNotFound ex) {
             throw new NeighborhoodsAlgorithmEx("Oops. something went wrong");
         } catch (NodeNotFound ex) {
@@ -78,8 +86,22 @@ public class Node {
                 
                  --> return 06
                  */
-                IUrbanizationID down = this.api.getAdjacent(this.id, DirectionID.DOWN);
-                return new Node(down, this.api);
+                try {
+                    IUrbanizationID down = this.api.getAdjacent(this.id, DirectionID.DOWN);
+                    return new Node(down, this.api);
+                } catch (NoAdjacentNode ex2) {
+                    /*
+                        this catch manage the following situation:
+                        --> this.id = 07
+                        01 02 03            
+                        04 05 06
+                        07 08 09
+                
+                        --> return 08
+                     */
+                    IUrbanizationID right = this.api.getAdjacent(this.id, DirectionID.RIGHT);
+                    return new Node(right, this.api);
+                }
 
             } catch (NodeNotFound | DirectionNotFound ex1) {
                 throw new NeighborhoodsAlgorithmEx("Oops. something went wrong");
@@ -108,6 +130,22 @@ public class Node {
                 IUrbanizationID down = this.api.getAdjacent(this.id, DirectionID.DOWN);
                 return new Node(down, this.api);
 
+            } catch (NoAdjacentNode ex1) {
+                try {
+                    /*
+                        this catch manage the following situation:
+                        --> this.id = 09
+                        01 02 03            
+                        04 05 06
+                        07 08 09
+
+                        --> return 08
+                     */
+                    IUrbanizationID left = this.api.getAdjacent(this.id, DirectionID.LEFT);
+                    return new Node(left, this.api);
+                } catch (NodeNotFound | DirectionNotFound ex2) {
+                    throw new NeighborhoodsAlgorithmEx("Oops. something went wrong");
+                }
             } catch (NodeNotFound | DirectionNotFound ex1) {
                 throw new NeighborhoodsAlgorithmEx("Oops. something went wrong");
             }
@@ -121,7 +159,7 @@ public class Node {
     public String toString() {
         return this.id.toString();
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

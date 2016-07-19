@@ -138,7 +138,8 @@ public class Neighborhoods {
         parentCardianlNodes.put(NodeType.SOUTHERN_EST, southernEst);
         parentCardianlNodes.put(NodeType.SOUTHERN_WEST, southernWest);
 
-        System.out.println(northernWest + " " + northernEst + " " + southernEst + " " + southernWest);
+        logger.log(Level.INFO, "Cardinal points: N-W:{0} N-E:{1} S-E: {2} S-W:{3}",
+                new Object[]{northernWest, northernEst, southernEst, southernWest});
 
         return parentCardianlNodes;
     }
@@ -151,15 +152,16 @@ public class Neighborhoods {
         // Node limitNode = getInitialLimitNode(scandDirection, parentCardianlNodes);
         Entry<Node, DirectionID> initials = getStartingNode(scandDirection, parentCardianlNodes);
         if (initials == null) {
-            logger.log(Level.WARNING,"NeighborhoodNodes empty");
+            logger.log(Level.WARNING, "NeighborhoodNodes empty");
             // No solution
             return neighborhoodNodes;
         }
         Node currentNode = initials.getKey();
         DirectionID currentDir = initials.getValue();
-        Node limitNode = getLimitNode(currentNode, scandDirection, parentCardianlNodes);
+        //Node limitNode = getLimitNode(currentNode, scandDirection, parentCardianlNodes);
         neighborhoodNodes.add(currentNode);
         int startIndex = getStartIndex(currentDir, scandDirection);
+        Node limitNode = getLimitNode(startIndex, scandDirection, parentCardianlNodes);
         for (int i = startIndex; i < scandDirection.getSizeSequence(); i++) {
             while (true) {
                 if (currentNode == null) {
@@ -171,6 +173,7 @@ public class Neighborhoods {
                         adjacentId = api.getAdjacent(currentNode.getId(), currentDir);
                         if (adjacentId.equals(centraltNode)) {
                             // Reached limit
+                            currentNode = new Node(centraltNode, api);
                             break;
                         }
                         logger.log(Level.INFO, "Adding node {0} as neighbor", adjacentId);
@@ -193,8 +196,17 @@ public class Neighborhoods {
 
             }
 
+            DirectionID prevDir = currentDir;
             currentDir = scandDirection.getNext(currentDir);
-            limitNode = getLimitNode(limitNode, scandDirection, parentCardianlNodes);
+            Node lasLimitNode = limitNode;
+            limitNode = getLimitNode(i + 1, scandDirection, parentCardianlNodes);
+            /*if (lasLimitNode == null && limitNode != null && currentNode != null) {
+                try {
+                    currentNode = new Node(api.getAdjacent(currentNode.getId(), prevDir), api);
+                } catch (NoAdjacentNode | NodeNotFound | DirectionNotFound ex) {
+                    Logger.getLogger(Neighborhoods.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }*/
 
         }
         // Start node inserted two time, remove the last
@@ -253,6 +265,23 @@ public class Neighborhoods {
         }
 
         return i;
+    }
+
+    private Node getLimitNode(int currentIndex, ScanDirection scandDirection,
+            Map<NodeType, Node> parentCardianlNodes) {
+
+        if (scandDirection.equals(ScanDirection.CLOCKWISE)) {
+            currentIndex = (currentIndex >= clockWiseOrdered.size() - 1)
+                    ? 0 : currentIndex + 1;
+
+        } else {
+            currentIndex = (currentIndex == 0)
+                    ? clockWiseOrdered.size() - 1 : currentIndex - 1;
+        }
+        NodeType nextCardinalLimit = clockWiseOrdered.get(currentIndex);
+        Node newLimitNode = parentCardianlNodes.get(nextCardinalLimit);
+        logger.log(Level.INFO, "New Node limit {0}", newLimitNode);
+        return newLimitNode;
     }
 
     private Node getLimitNode(Node current, ScanDirection scandDirection,
