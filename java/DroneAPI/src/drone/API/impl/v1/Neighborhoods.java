@@ -162,6 +162,11 @@ public class Neighborhoods {
         neighborhoodNodes.add(currentNode);
         int startIndex = getStartIndex(currentDir, scandDirection);
         Node limitNode = getLimitNode(startIndex, scandDirection, parentCardianlNodes);
+
+        logger.log(Level.INFO, "StartNode: {0} direction:{1} limitNode: {2} "
+                + "startIndex: {3}", new Object[]{currentNode, currentDir,
+                    limitNode, startIndex});
+
         for (int i = startIndex; i < scandDirection.getSizeSequence(); i++) {
             while (true) {
                 if (currentNode == null) {
@@ -174,7 +179,9 @@ public class Neighborhoods {
                         if (adjacentId.equals(centraltNode)) {
                             // Reached limit
                             currentNode = new Node(centraltNode, api);
-                            break;
+                            logger.log(Level.INFO, "Passing for centralNode, skip it. "
+                                    + "new CurrentNode:{0}", currentNode);
+                            continue;
                         }
                         logger.log(Level.INFO, "Adding node {0} as neighbor", adjacentId);
                         neighborhoodNodes.add(new Node(adjacentId, api));
@@ -196,9 +203,8 @@ public class Neighborhoods {
 
             }
 
-            DirectionID prevDir = currentDir;
             currentDir = scandDirection.getNext(currentDir);
-            Node lasLimitNode = limitNode;
+
             limitNode = getLimitNode(i + 1, scandDirection, parentCardianlNodes);
             /*if (lasLimitNode == null && limitNode != null && currentNode != null) {
                 try {

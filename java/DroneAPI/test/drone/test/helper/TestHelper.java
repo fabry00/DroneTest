@@ -42,7 +42,8 @@ public class TestHelper {
         }
 
         UrbanizationMatrix g = builder.build(row, col);
-        System.out.println(g.toString());
+        // Print the Matrix
+        //System.out.println(g.toString());
 
         IDealistaAPI api = (IDealistaAPI) g;
 
