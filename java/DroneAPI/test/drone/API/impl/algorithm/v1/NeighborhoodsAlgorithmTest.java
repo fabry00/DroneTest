@@ -1,24 +1,17 @@
 package drone.API.impl.algorithm.v1;
 
-import drone.API.impl.algorithm.v1.NeighborhoodsAlgorithm;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import drone.test.helper.TestHelper;
-import drone.mock.API.IDealistaAPI;
 import drone.API.INeighborhoodsAlgorithm;
-import drone.API.IDroneAPI;
 import drone.API.exception.NeighborhoodsAlgorithmEx;
-import drone.mock.API.IUrbanizationID;
 import drone.mock.exception.DuplicatedAdjacentNode;
 import drone.mock.exception.NodeAlreadyAdded;
 import drone.mock.exception.NodeAlreadyAddedAsAdjacent;
 import drone.mock.exception.NodeNotFound;
-import drone.API.impl.DroneAPI;
 import drone.test.helper.TestCase;
 import drone.test.helper.TestCaseBuilder;
 

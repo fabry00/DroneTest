@@ -1,18 +1,14 @@
 package drone.API.impl.algorithm.v2;
 
 import drone.API.INeighborhoodsAlgorithm;
-import drone.mock.API.IDealistaAPI;
-import drone.mock.API.IUrbanizationID;
 import drone.test.helper.TestCase;
 import drone.test.helper.TestCaseBuilder;
 import drone.test.helper.TestHelper;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -54,8 +50,35 @@ public class NeighborhoodsAlgorithmV2Test {
      * @throws java.lang.Exception
      */
     @Test
-    public void testGetNeighborhoods() throws Exception {
+    public void testGetNeighborhoods1() throws Exception {
         TestCase test = testBuilder.testGetNeighborhoods1();
+        executeTest(test);
+    }
+    
+    /**
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testGetNeighborhoods2() throws Exception {
+        TestCase test = testBuilder.testGetNeighborhoods2();
+        executeTest(test);
+    }
+    
+    /**
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testGetNeighborhoods3() throws Exception {
+        TestCase test = testBuilder.testGetNeighborhoods3();
+        executeTest(test);
+    }
+    
+    /**
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testGetNeighborhoods4() throws Exception {
+        TestCase test = testBuilder.testGetNeighborhoods4();
         executeTest(test);
     }
     

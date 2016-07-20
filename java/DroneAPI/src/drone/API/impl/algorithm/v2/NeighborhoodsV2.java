@@ -30,15 +30,15 @@ public class NeighborhoodsV2 {
         this.centralNode = centraltNode;
 
     }
-    
+
     public List<Node> getNodes() {
         List<Node> nodes = new ArrayList<>();
         List<ISide> orderedSides = getOrderedSides();
         for (ISide side : orderedSides) {
-            for(Node node : side.getNodes()) {
+            for (Node node : side.getNodes()) {
                 // Skipping already addded nodes
                 // The vertices are shared for each adjacent side
-                if(!nodes.contains(node)){                    
+                if (!nodes.contains(node)) {
                     nodes.add(node);
                 }
             }
@@ -54,17 +54,18 @@ public class NeighborhoodsV2 {
         }
         return Collections.unmodifiableList(nodes);
     }
-    
+
     public void calculateNeighborhoodsNodes(IDealistaAPI api, int range)
             throws NeighborhoodsAlgorithmEx {
 
         SideFactory factory = new SideFactory();
-        for (Entry<SideType, ISide> entry : sides.entrySet()) {
-
-            ISide side = factory.createDirection(entry.getKey());
+        for (SideType type : SideType.values()) {
+            ISide side = factory.createDirection(type);
 
             side.calculateNeighborhoodsNodes(api, centralNode, range);
+            sides.put(type, side);
         }
+      
     }
 
     private List<ISide> getOrderedSides() {
