@@ -2,6 +2,10 @@ package drone.mock;
 
 import java.util.Objects;
 
+/**
+ * Representa a Coordinate of a Node
+ * @author exfaff
+ */
 public class Coord {
 
     private final double x;

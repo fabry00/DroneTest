@@ -1,5 +1,11 @@
 package drone.API.exception;
 
+/**
+ * Algorithm exception.
+ * Fired if something went wrong
+ * 
+ * @author Fabrizio Faustinoni
+ */
 public class NeighborhoodsAlgorithmEx extends Exception{
     
     private static final long serialVersionUID = 1;

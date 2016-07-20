@@ -1,9 +1,13 @@
 package drone.mock;
 
 import java.util.Objects;
-import drone.API.IUrbanizationID;
-import drone.API.exception.NodeAlreadyAddedAsAdjacent;
+import drone.mock.API.IUrbanizationID;
+import drone.mock.exception.NodeAlreadyAddedAsAdjacent;
 
+/**
+ * Represent a Node in the UrbanizationMatrix
+ * @author Fabrizion Faustinoni
+ */
 public class Node {
 
     private final IUrbanizationID id;
@@ -49,6 +53,9 @@ public class Node {
         this.coords = coords;
     }
 
+    /**
+     * Builder
+     */
     public static class Builder {
 
         private Coord coords;
