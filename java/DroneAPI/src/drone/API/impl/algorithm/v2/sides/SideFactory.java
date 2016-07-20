@@ -1,7 +1,7 @@
 package drone.API.impl.algorithm.v2.sides;
 
 import drone.API.exception.NeighborhoodsAlgorithmEx;
-import drone.API.impl.algorithm.v2.NeighborhoodsV2.SideType;
+import drone.API.impl.algorithm.v2.sides.ISide.SideType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,15 +28,20 @@ public class SideFactory {
             };
 
     /**
-     * @param tpye
+     * @param type
+     * @param isFirstSide
      * @return 
      * @throws drone.API.exception.NeighborhoodsAlgorithmEx 
      */
-    public ISide createDirection(SideType tpye) throws NeighborhoodsAlgorithmEx {
+    public ISide createDirection(SideType type, boolean isFirstSide) throws NeighborhoodsAlgorithmEx {
 
-        Class<ISide> _class = FACTORY_MAP.get(tpye);
+        Class<ISide> _class = FACTORY_MAP.get(type);
         try {
-            return _class.newInstance();
+            ISide side =  _class.newInstance();
+            
+            side.setIsFirst(isFirstSide);
+            side.setType(type);
+            return side;
         } catch (InstantiationException | IllegalAccessException |
                 SecurityException | IllegalArgumentException ex) {
 

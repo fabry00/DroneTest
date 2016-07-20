@@ -2,6 +2,7 @@ package drone.API.impl.algorithm.v2;
 
 import drone.API.exception.NeighborhoodsAlgorithmEx;
 import drone.API.impl.algorithm.v2.sides.ISide;
+import drone.API.impl.algorithm.v2.sides.ISide.SideType;
 import drone.API.impl.algorithm.v2.sides.SideFactory;
 import drone.mock.API.IDealistaAPI;
 import drone.mock.API.IUrbanizationID;
@@ -10,15 +11,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 public class NeighborhoodsV2 {
-
-    public enum SideType {
-
-        UP, RIGHT, BOTTOM, LEFT
-    };
 
     private static final Logger logger = Logger.getLogger(NeighborhoodsV2.class.getName());
 
@@ -58,23 +53,40 @@ public class NeighborhoodsV2 {
     public void calculateNeighborhoodsNodes(IDealistaAPI api, int range)
             throws NeighborhoodsAlgorithmEx {
 
+        SideType firstSide = getSidesOrder().iterator().next();
         SideFactory factory = new SideFactory();
         for (SideType type : SideType.values()) {
-            ISide side = factory.createDirection(type);
+
+            boolean isFirst = (firstSide.equals(type)) ? true : false;
+
+            ISide side = factory.createDirection(type, isFirst);
 
             side.calculateNeighborhoodsNodes(api, centralNode, range);
             sides.put(type, side);
         }
-      
+
     }
 
-    private List<ISide> getOrderedSides() {
-        List<ISide> sidesOrdered = new ArrayList<>();
-        sidesOrdered.add(sides.get(SideType.UP));
-        sidesOrdered.add(sides.get(SideType.RIGHT));
-        sidesOrdered.add(sides.get(SideType.BOTTOM));
-        sidesOrdered.add(sides.get(SideType.LEFT));
+    private List<SideType> getSidesOrder() {
+        List<SideType> sidesOrdered = new ArrayList<>();
+        sidesOrdered.add(SideType.UP);
+        sidesOrdered.add(SideType.RIGHT);
+        sidesOrdered.add(SideType.BOTTOM);
+        sidesOrdered.add(SideType.LEFT);
 
         return sidesOrdered;
     }
+
+    private List<ISide> getOrderedSides() {
+        List<SideType> sidesOrder = getSidesOrder();
+        List<ISide> sidesOrdered = new ArrayList<>();
+
+        for (SideType type : sidesOrder) {
+            sidesOrdered.add(sides.get(type));
+        }
+
+        return sidesOrdered;
+    }
+
+     
 }

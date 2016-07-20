@@ -21,9 +21,23 @@ public abstract class Side {
     private static final Logger logger = Logger.getLogger(Side.class.getName());
 
     protected List<Node> nodes = new ArrayList<>();
+    private boolean isFirstSide;
+    private ISide.SideType sideType;
 
     public Collection<Node> getNodes() {
         return Collections.unmodifiableList(nodes);
+    }
+    
+    public void setIsFirst(boolean isFirstSide) {
+        this.isFirstSide = isFirstSide;
+    }
+    
+    public void setType(ISide.SideType sideType) {
+        this.sideType = sideType;
+    }
+    
+    public ISide.SideType getSideType(){
+        return this.sideType;
     }
 
     public Collection<IUrbanizationID> getNodesIds() {
@@ -35,13 +49,14 @@ public abstract class Side {
         return Collections.unmodifiableList(ids);
     }
 
-    protected Entry<IUrbanizationID, Integer> getStartingNode(IDealistaAPI api, IUrbanizationID centralNode, int range) {
+    protected Entry<IUrbanizationID, Integer> getStartingNode(IDealistaAPI api,
+            IUrbanizationID centralNode, int range) {
 
         logger.log(Level.INFO, "calculating starting node for side: {0}"
                 + ". CentralNode: {1}, range; {3}",
                 new Object[]{getClass().getSimpleName(), centralNode, range});
         IUrbanizationID currentID = centralNode;
-        
+
         int failingAttempts = 0;
         boolean found = true;
         for (DirectionID direction : getStartingNodeDirections()) {
@@ -49,7 +64,7 @@ public abstract class Side {
             for (int i = 0; i < range; i++) {
                 try {
                     currentID = api.getAdjacent(currentID, direction);
-                    
+
                 } catch (NodeNotFound | DirectionNotFound ex) {
                     logger.log(Level.SEVERE, null, ex);
                 } catch (NoAdjacentNode ex) {
@@ -59,23 +74,30 @@ public abstract class Side {
                     // Not an error
                     failingAttempts++;
                     found = false;
+                    if (isFirstSide) {
+                        // Stop searching
+                        return new AbstractMap.SimpleEntry(null, failingAttempts);
+                    }
+                    // ELSE
                     // Change direction
                     break;
 
                 }
             }
         }
-        if(found){
-            currentID = (failingAttempts > range)? null: currentID;
-        }else{
+        if (found) {
+            currentID = (failingAttempts > range) ? null : currentID;
+        } else {
             currentID = null;
         }
         return new AbstractMap.SimpleEntry(currentID, failingAttempts);
     }
 
-    public void calculateNeighborhoodsNodes(IDealistaAPI api, IUrbanizationID centralNode, int range) {
+    public void calculateNeighborhoodsNodes(IDealistaAPI api,
+            IUrbanizationID centralNode, int range) {
 
-        Entry<IUrbanizationID, Integer> startNodeEntry = getStartingNode(api, centralNode, range);
+        Entry<IUrbanizationID, Integer> startNodeEntry = getStartingNode(api,
+                centralNode, range);
         IUrbanizationID startNode = startNodeEntry.getKey();
 
         if (startNode == null) {
@@ -93,10 +115,10 @@ public abstract class Side {
         int max = (range * 2) - startNodeEntry.getValue();
         for (int i = 0; i < max; i++) {
             try {
-               
+
                 Node node = new Node(api.getAdjacent(currentNode, sideDir));
-               
-                 if(node.getId().equals(centralNode)) {
+
+                if (node.getId().equals(centralNode)) {
                     logger.log(Level.INFO, "Reached centralNode {0} stop searching", currentNode);
                     break;
                 }

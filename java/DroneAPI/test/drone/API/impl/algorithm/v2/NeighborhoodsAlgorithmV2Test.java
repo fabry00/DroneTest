@@ -82,4 +82,13 @@ public class NeighborhoodsAlgorithmV2Test {
         executeTest(test);
     }
     
+    /**
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testGetNeighborhoods5() throws Exception {
+        TestCase test = testBuilder.testGetNeighborhoods5();
+        executeTest(test);
+    }
+    
 }

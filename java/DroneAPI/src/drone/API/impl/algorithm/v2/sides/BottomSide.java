@@ -8,8 +8,8 @@ public class BottomSide extends Side implements ISide {
 
     private static final List<DirectionID> STARTING_NODE_DIRECTIONS = new ArrayList<DirectionID>() {
         {
-            add(DirectionID.DOWN);
             add(DirectionID.RIGHT);
+            add(DirectionID.DOWN);
         }
     };
 

@@ -14,6 +14,7 @@ public class UpSide extends Side implements ISide {
     };
     
     private static final DirectionID SIDE_DIRECTION = DirectionID.RIGHT;
+
     
     @Override
     protected List<DirectionID> getStartingNodeDirections() {
