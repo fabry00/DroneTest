@@ -12,11 +12,10 @@ import java.util.logging.Level;
 
 public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
 
-    protected static final DirectionID STARTING_DIRECTION = DirectionID.UP;
-    protected static final ScanDirection SCAN_DIRECTION = ScanDirection.CLOCKWISE;
+    private static final ScanDirection SCAN_DIRECTION = ScanDirection.CLOCKWISE;
 
     private static final Logger logger = Logger.getLogger(NeighborhoodsAlgorithm.class.getName());
-    protected IDealistaAPI api;
+    private IDealistaAPI api;
 
     @Override
     public List<IUrbanizationID> getNeighborhoods(double x, double y, int range,
@@ -54,7 +53,7 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
      * @return
      * @throws NeighborhoodsAlgorithmEx
      */
-    protected Neighborhoods calculateNeighborhoods(int range, IUrbanizationID startingNode)
+    private Neighborhoods calculateNeighborhoods(int range, IUrbanizationID startingNode)
             throws NeighborhoodsAlgorithmEx {
 
         if (range <= 0) {
@@ -66,18 +65,17 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
         Neighborhoods lastNeighborhoods = initStartingNeighborhoods(startingNode, api);
 
         int currentRange = 1;
-        // Calculating ONLY the Neighborhoods vertices until we reach the desired range
+        // Calculating the Neighborhoods until we reach the desired range
         while (currentRange <= range) {
+            // Calcuate the new Neighborhoods Vertex
             Neighborhoods newNeighborhoods = lastNeighborhoods.calculateParentVertices(api, SCAN_DIRECTION);
+            // Calculate the NeighborhoodsNodes
             newNeighborhoods.calculateNeighborhoodsNodes(lastNeighborhoods, api, SCAN_DIRECTION);
             
             lastNeighborhoods = newNeighborhoods;
             currentRange++;
         }
 
-        // in lastNeighborhoods we have stored the Neighborhoods vertices of the
-        // desired range Neighborhoods. Now we retrieve the full list of the Neighborhoods
-        //lastNeighborhoods.calculateNeighborhoodsNodes(api, SCAN_DIRECTION);
         return lastNeighborhoods;
     }
 
@@ -89,7 +87,7 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
      * @param api
      * @return
      */
-    protected Neighborhoods initStartingNeighborhoods(IUrbanizationID startingNode, IDealistaAPI api) {
+    private Neighborhoods initStartingNeighborhoods(IUrbanizationID startingNode, IDealistaAPI api) {
         return new Neighborhoods(new Node(startingNode),
                 new Node(startingNode),
                 new Node(startingNode),
