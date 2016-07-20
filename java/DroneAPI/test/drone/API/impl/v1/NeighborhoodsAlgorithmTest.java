@@ -9,15 +9,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import drone.test.helper.TestHelper;
-import drone.API.IDealistaAPI;
+import drone.mock.API.IDealistaAPI;
 import drone.API.INeighborhoodsAlgorithm;
-import drone.API.ITestDroneAPI;
-import drone.API.IUrbanizationID;
-import drone.API.exception.DuplicatedAdjacentNode;
-import drone.API.exception.NodeAlreadyAdded;
-import drone.API.exception.NodeAlreadyAddedAsAdjacent;
-import drone.API.exception.NodeNotFound;
-import drone.API.impl.TestDroneAPI;
+import drone.API.IDroneAPI;
+import drone.mock.API.IUrbanizationID;
+import drone.mock.exception.DuplicatedAdjacentNode;
+import drone.mock.exception.NodeAlreadyAdded;
+import drone.mock.exception.NodeAlreadyAddedAsAdjacent;
+import drone.mock.exception.NodeNotFound;
+import drone.API.impl.DroneAPI;
 
 /**
  *
@@ -87,7 +87,7 @@ public class NeighborhoodsAlgorithmTest {
         };
         
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 0");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -115,7 +115,7 @@ public class NeighborhoodsAlgorithmTest {
         int height = 5;
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
         List<IUrbanizationID> expected = new ArrayList<IUrbanizationID>() {
             {
                 add(helper.getId(1));
@@ -164,7 +164,7 @@ public class NeighborhoodsAlgorithmTest {
         int height = 5;
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
         List<IUrbanizationID> expected = new ArrayList<>();
         
         System.out.println("Test 1");
@@ -200,7 +200,7 @@ public class NeighborhoodsAlgorithmTest {
         };
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
         
         System.out.println("Test 4");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -238,7 +238,7 @@ public class NeighborhoodsAlgorithmTest {
         };
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 5");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -275,7 +275,7 @@ public class NeighborhoodsAlgorithmTest {
         };
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 6");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -312,7 +312,7 @@ public class NeighborhoodsAlgorithmTest {
         };
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 7");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -352,7 +352,7 @@ public class NeighborhoodsAlgorithmTest {
         };
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 8");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -391,7 +391,7 @@ public class NeighborhoodsAlgorithmTest {
         };
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 9");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -431,7 +431,7 @@ public class NeighborhoodsAlgorithmTest {
         };
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 10");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -470,7 +470,7 @@ public class NeighborhoodsAlgorithmTest {
         };
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 11");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -520,7 +520,7 @@ public class NeighborhoodsAlgorithmTest {
         };
         
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
         
         System.out.println("Test 12");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -554,7 +554,7 @@ public class NeighborhoodsAlgorithmTest {
         List<IUrbanizationID> expected = new ArrayList<>();
 
         IDealistaAPI api = helper.getIdealistaAPI(width, height);
-        ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
 
         System.out.println("Test 13");
         System.out.println("InputNode ("+x+","+y+") range: "+range);
@@ -566,12 +566,12 @@ public class NeighborhoodsAlgorithmTest {
     }
     
     
-    @Test
+    //@Test
     /**
      * InputNode (0,0) range: 1
      * 01(0.0,0.0) 02(1.0,0.0) 03(2.0,0.0) 
      */
-    public void testGetNeighborhoods14() throws Exception {
+    /*public void testGetNeighborhoods14() throws Exception {
         // Input node coords
         int x = 0;
         int y = 0;
@@ -597,17 +597,17 @@ public class NeighborhoodsAlgorithmTest {
         
         List<IUrbanizationID> actual = testDrone.getNeighborhoods(x, y, range);
         assertEquals(expected, actual);
-    }
+    }*/
     
     
-    @Test
+    //@Test
     /**
      * InputNode (0,0) range: 1
      * 01(0.0,0.0) 
      * 02(0.0,1.0) 
      * 03(0.0,2.0) 
      */
-    public void testGetNeighborhoods15() throws Exception {
+    /*public void testGetNeighborhoods15() throws Exception {
         // Input node coords
         int x = 0;
         int y = 0;
@@ -633,5 +633,5 @@ public class NeighborhoodsAlgorithmTest {
         
         List<IUrbanizationID> actual = testDrone.getNeighborhoods(x, y, range);
         assertEquals(expected, actual);
-    }
+    }*/
 }

@@ -1,10 +1,10 @@
 package drone.test.helper;
 
-import drone.API.IDealistaAPI;
-import drone.API.exception.DuplicatedAdjacentNode;
-import drone.API.exception.NodeAlreadyAdded;
-import drone.API.exception.NodeAlreadyAddedAsAdjacent;
-import drone.API.exception.NodeNotFound;
+import drone.mock.API.IDealistaAPI;
+import drone.mock.exception.DuplicatedAdjacentNode;
+import drone.mock.exception.NodeAlreadyAdded;
+import drone.mock.exception.NodeAlreadyAddedAsAdjacent;
+import drone.mock.exception.NodeNotFound;
 import drone.mock.Node;
 import drone.mock.UrbanizationID;
 import drone.mock.UrbanizationMatrix;
@@ -25,9 +25,9 @@ public class TestHelper {
      * @param row
      * @param col
      * @return 
-     * @throws drone.API.exception.NodeAlreadyAddedAsAdjacent
-     * @throws drone.API.exception.DuplicatedAdjacentNode
-     * @throws drone.API.exception.NodeAlreadyAdded
+     * @throws drone.mock.exception.NodeAlreadyAddedAsAdjacent
+     * @throws drone.mock.exception.DuplicatedAdjacentNode
+     * @throws drone.mock.exception.NodeAlreadyAdded
      */
     public IDealistaAPI createUBMatrix(int row, int col) throws NodeAlreadyAddedAsAdjacent, DuplicatedAdjacentNode, NodeAlreadyAdded {
         UrbanizationMatrix.Builder builder = new UrbanizationMatrix.Builder();

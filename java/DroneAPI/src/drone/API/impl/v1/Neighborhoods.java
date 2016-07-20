@@ -8,13 +8,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import drone.API.DirectionID;
-import drone.API.IDealistaAPI;
-import drone.API.IUrbanizationID;
-import drone.API.exception.DirectionNotFound;
+import drone.mock.API.DirectionID;
+import drone.mock.API.IDealistaAPI;
+import drone.mock.API.IUrbanizationID;
+import drone.mock.exception.DirectionNotFound;
 import drone.API.exception.NeighborhoodsAlgorithmEx;
-import drone.API.exception.NoAdjacentNode;
-import drone.API.exception.NodeNotFound;
+import drone.mock.exception.NoAdjacentNode;
+import drone.mock.exception.NodeNotFound;
 
 public class Neighborhoods {
 

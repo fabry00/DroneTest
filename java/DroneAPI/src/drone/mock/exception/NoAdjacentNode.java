@@ -1,5 +1,10 @@
-package drone.API.exception;
+package drone.mock.exception;
 
+/**
+ * Exception fired if the required Adjacent not is not found
+ * 
+ * @author Fabrizio Faustinoni
+ */
 public class NoAdjacentNode extends Exception{
     
     private static final long serialVersionUID = 1;

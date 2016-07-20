@@ -1,5 +1,9 @@
-package drone.API.exception;
+package drone.mock.exception;
 
+/**
+ * Fired if a same node already exists in the UrmanizationMatrix
+ * @author Fabrizio Faustinoni
+ */
 public class NodeAlreadyAdded extends Exception{
     
     private static final long serialVersionUID = 1;

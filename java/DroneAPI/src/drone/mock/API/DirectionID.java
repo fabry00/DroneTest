@@ -1,7 +1,7 @@
-package drone.API;
+package drone.mock.API;
 
 /**
- * Types of Directions
+ * Types of Directions supported
  * @author Fabrizio Faustinoni
  */
 public enum DirectionID {

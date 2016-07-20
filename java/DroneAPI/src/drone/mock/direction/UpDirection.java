@@ -1,13 +1,26 @@
 package drone.mock.direction;
 
-import drone.API.DirectionID;
-import drone.API.exception.NoAdjacentNode;
+import drone.mock.API.DirectionID;
+import drone.mock.exception.NoAdjacentNode;
 import drone.mock.Coord;
 
+/**
+ * Represent the UP direction
+ * @author Fabrizio Faustinoni
+ */
 public class UpDirection extends BaseDirection implements IDirection {
 
     private static final DirectionID LABEL = DirectionID.UP;
 
+    /**
+     * Given a source's coordinates return the coordinates of the adjacent node that 
+     * is above.
+     * @param sorceNodeCoord
+     * @param matrixWidth
+     * @param matrixHeight
+     * @return
+     * @throws NoAdjacentNode 
+     */
     @Override
     public Coord getAdjacentCoord(Coord sorceNodeCoord,
             int matrixWidth,

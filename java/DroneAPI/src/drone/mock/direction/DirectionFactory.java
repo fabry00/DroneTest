@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import drone.API.DirectionID;
-import drone.API.exception.DirectionNotFound;
+import drone.mock.API.DirectionID;
+import drone.mock.exception.DirectionNotFound;
 
 /**
  * Create the righ instance associated to the right Direction id
@@ -14,6 +14,9 @@ import drone.API.exception.DirectionNotFound;
  */
 public class DirectionFactory {
 
+    /**
+     * Map that associate for each DirectionID the right implementation
+     */
     private static final Map<DirectionID, Class<IDirection>> FACTORY_MAP
             = new HashMap() {
         {
@@ -24,7 +27,15 @@ public class DirectionFactory {
         }
     };
 
-    public IDirection createDirection(DirectionID directionID, int row, int col)
+    /**
+     * Create an instance of the specific IDirection
+     * @param directionID
+     * @param rows Matrix rows
+     * @param col Matrix columns
+     * @return
+     * @throws DirectionNotFound 
+     */
+    public IDirection createDirection(DirectionID directionID, int rows, int col)
             throws DirectionNotFound {
 
         Class<IDirection> _class = FACTORY_MAP.get(directionID);

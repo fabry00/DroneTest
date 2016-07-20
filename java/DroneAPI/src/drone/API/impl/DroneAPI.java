@@ -4,27 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import drone.API.DirectionID;
+import drone.mock.API.DirectionID;
 import drone.API.INeighborhoodsAlgorithm;
-import drone.API.ITestDroneAPI;
-import drone.API.IUrbanizationID;
-import drone.API.IDealistaAPI;
-import drone.API.exception.DirectionNotFound;
+import drone.API.IDroneAPI;
+import drone.mock.API.IUrbanizationID;
+import drone.mock.API.IDealistaAPI;
+import drone.mock.exception.DirectionNotFound;
 import drone.API.exception.NeighborhoodsAlgorithmEx;
-import drone.API.exception.NoAdjacentNode;
-import drone.API.exception.NodeNotFound;
+import drone.mock.exception.NoAdjacentNode;
+import drone.mock.exception.NodeNotFound;
 
-public class TestDroneAPI implements ITestDroneAPI {
+/**
+ * Drone API implementation
+ * @author Fabrizio Faustinoni
+ */
+public class DroneAPI implements IDroneAPI {
 
     private final IDealistaAPI api;
     private final INeighborhoodsAlgorithm algorithm;
+    
     /**
      * Dependency Injection of IDealistaAPI
-     * Dependency Injection of INeighborhoods
+     * Dependency Injection of INeighborhoodsAlgorithm
      * @param api 
      * @param algorithm 
      */
-    public TestDroneAPI(IDealistaAPI api, INeighborhoodsAlgorithm algorithm) {
+    public DroneAPI(IDealistaAPI api, INeighborhoodsAlgorithm algorithm) {
         this.api = api;
         this.algorithm = algorithm;
     }
@@ -34,7 +39,7 @@ public class TestDroneAPI implements ITestDroneAPI {
         try {
             return this.algorithm.getNeighborhoods(x, y, range, api);
         } catch (NeighborhoodsAlgorithmEx ex) {
-            Logger.getLogger(TestDroneAPI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DroneAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return new ArrayList<>();

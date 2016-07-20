@@ -2,7 +2,7 @@ package drone.API.impl.v1;
 
 import java.util.ArrayList;
 import java.util.List;
-import drone.API.DirectionID;
+import drone.mock.API.DirectionID;
 
 public enum ScanDirection {
 

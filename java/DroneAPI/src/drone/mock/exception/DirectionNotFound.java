@@ -1,5 +1,10 @@
-package drone.API.exception;
+package drone.mock.exception;
 
+/**
+ * Fired if the Direction provided doesn't match with any direction supported
+ * 
+ * @author Fabrizio Faustinoni
+ */
 public class DirectionNotFound extends Exception{
     
     private static final long serialVersionUID = 1;

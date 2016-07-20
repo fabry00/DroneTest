@@ -1,8 +1,12 @@
 package drone.mock;
 
 import java.util.Objects;
-import drone.API.IUrbanizationID;
+import drone.mock.API.IUrbanizationID;
 
+/**
+ * Unique Node ID object
+ * @author Fabrizion Faustinoni
+ */
 public class UrbanizationID implements IUrbanizationID{
     
     private final String id;
