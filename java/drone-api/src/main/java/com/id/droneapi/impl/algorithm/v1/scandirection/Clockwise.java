@@ -3,7 +3,7 @@ package com.id.droneapi.impl.algorithm.v1.scandirection;
 import com.id.droneapi.impl.algorithm.v1.Neighborhoods;
 import com.id.droneapi.impl.algorithm.v1.Neighborhoods.NodeType;
 import com.id.droneapi.impl.algorithm.v1.Node;
-import com.id.droneapi.mock.API.DirectionID;
+import com.id.droneapi.mock.api.DirectionID;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;

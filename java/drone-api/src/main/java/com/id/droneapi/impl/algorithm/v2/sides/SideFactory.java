@@ -28,10 +28,11 @@ public class SideFactory {
             };
 
     /**
-     * @param type
-     * @param isFirstSide
-     * @return 
-     * @throws com.id.droneapi.exception.NeighborhoodsAlgorithmEx 
+     * Create the side instance
+     * @param type the Side type
+     * @param isFirstSide true if is the first to be used
+     * @return the side
+     * @throws com.id.droneapi.exception.NeighborhoodsAlgorithmEx the exception
      */
     public ISide createDirection(SideType type, boolean isFirstSide) throws NeighborhoodsAlgorithmEx {
 

@@ -1,7 +1,7 @@
 package com.id.droneapi.mock;
 
 import java.util.Objects;
-import com.id.droneapi.mock.API.IUrbanizationID;
+import com.id.droneapi.mock.api.IUrbanizationID;
 
 /**
  * Unique Node ID object

@@ -2,10 +2,10 @@ package com.id.droneapi.impl.algorithm.v2;
 
 import java.util.List;
 import java.util.logging.Logger;
-import com.id.droneapi.mock.API.IDealistaAPI;
+import com.id.droneapi.mock.api.IDealistaAPI;
 import com.id.droneapi.INeighborhoodsAlgorithm;
 import com.id.droneapi.IScanDirection;
-import com.id.droneapi.mock.API.IUrbanizationID;
+import com.id.droneapi.mock.api.IUrbanizationID;
 import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
 import com.id.droneapi.mock.exception.NodeNotFound;
 import java.util.logging.Level;

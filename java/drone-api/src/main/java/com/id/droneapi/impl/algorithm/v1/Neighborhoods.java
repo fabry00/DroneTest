@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.id.droneapi.mock.API.DirectionID;
-import com.id.droneapi.mock.API.IDealistaAPI;
-import com.id.droneapi.mock.API.IUrbanizationID;
+import com.id.droneapi.mock.api.DirectionID;
+import com.id.droneapi.mock.api.IDealistaAPI;
+import com.id.droneapi.mock.api.IUrbanizationID;
 import com.id.droneapi.mock.exception.DirectionNotFound;
 import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
 import com.id.droneapi.impl.algorithm.v1.scandirection.IScanDirectionV1;
@@ -66,7 +66,7 @@ public class Neighborhoods {
     /**
      * Return all the nodes
      *
-     * @return
+     * @return the list
      */
     public List<Node> getNodes() {
         return neighborNodes;
@@ -75,23 +75,23 @@ public class Neighborhoods {
     /**
      * Get the list of IUrbanizationID of all nodes
      *
-     * @return
+     * @return the list
      */
     public List<IUrbanizationID> getNodesIDs() {
         List<IUrbanizationID> ids = new ArrayList<>();
-        for (Node node : neighborNodes) {
+        neighborNodes.stream().forEach((node) -> {
             ids.add(node.getId());
-        }
+        });
         return ids;
     }
 
     /**
      * Calculate the vertices of the parent Neighborhoods
      *
-     * @param api
-     * @param scandDirection
-     * @return
-     * @throws NeighborhoodsAlgorithmEx
+     * @param api the Idealista Api
+     * @param scandDirection the scan direction
+     * @return the Neighborhoods
+     * @throws NeighborhoodsAlgorithmEx the exception
      */
     public Neighborhoods calculateParentVertices(IDealistaAPI api,
             IScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
@@ -108,10 +108,10 @@ public class Neighborhoods {
     /**
      * Calculate all the NeighborhoodsNodes
      *
-     * @param parentNeighborhoods
-     * @param api
-     * @param scandDirection
-     * @throws NeighborhoodsAlgorithmEx
+     * @param parentNeighborhoods the parent Neighborhoods
+     * @param api the Idealista API
+     * @param scandDirection the scan direction
+     * @throws NeighborhoodsAlgorithmEx the exception
      */
     public void calculateNeighborhoodsNodes(Neighborhoods parentNeighborhoods,
             IDealistaAPI api, IScanDirectionV1 scandDirection) throws NeighborhoodsAlgorithmEx {
@@ -125,8 +125,8 @@ public class Neighborhoods {
     /**
      * Algorithm to retrieve the Neighborhoods parent vertices
      *
-     * @return
-     * @throws NeighborhoodsAlgorithmEx
+     * @return The  Neighborhoods parent vertices map 
+     * @throws NeighborhoodsAlgorithmEx the exception
      */
     private Map<NodeType, Node> retreiveParentVertices(IDealistaAPI api) throws NeighborhoodsAlgorithmEx {
         Map<NodeType, Node> parentVerticesNodes = new HashMap<>();

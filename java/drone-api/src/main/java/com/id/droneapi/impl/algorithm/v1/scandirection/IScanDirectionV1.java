@@ -5,7 +5,7 @@ import com.id.droneapi.IScanDirection;
 import com.id.droneapi.impl.algorithm.v1.Neighborhoods;
 import com.id.droneapi.impl.algorithm.v1.Neighborhoods.NodeType;
 import com.id.droneapi.impl.algorithm.v1.Node;
-import com.id.droneapi.mock.API.DirectionID;
+import com.id.droneapi.mock.api.DirectionID;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;

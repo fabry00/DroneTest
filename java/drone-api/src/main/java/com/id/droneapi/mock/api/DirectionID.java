@@ -1,4 +1,4 @@
-package com.id.droneapi.mock.API;
+package com.id.droneapi.mock.api;
 
 /**
  * Types of Directions supported

@@ -1,8 +1,8 @@
 package com.id.droneapi.impl.algorithm.v2.sides;
 
 import com.id.droneapi.impl.algorithm.v2.Node;
-import com.id.droneapi.mock.API.IDealistaAPI;
-import com.id.droneapi.mock.API.IUrbanizationID;
+import com.id.droneapi.mock.api.IDealistaAPI;
+import com.id.droneapi.mock.api.IUrbanizationID;
 import java.util.Collection;
 
 public interface ISide {

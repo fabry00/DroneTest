@@ -1,6 +1,6 @@
 package com.id.droneapi.helper;
 
-import com.id.droneapi.mock.API.IUrbanizationID;
+import com.id.droneapi.mock.api.IUrbanizationID;
 import java.util.List;
 
 public class TestCase {

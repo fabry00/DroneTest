@@ -2,12 +2,12 @@ package com.id.droneapi.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.id.droneapi.mock.API.DirectionID;
+import com.id.droneapi.mock.api.DirectionID;
 import com.id.droneapi.INeighborhoodsAlgorithm;
 import com.id.droneapi.IDroneAPI;
 import com.id.droneapi.IScanDirection;
-import com.id.droneapi.mock.API.IUrbanizationID;
-import com.id.droneapi.mock.API.IDealistaAPI;
+import com.id.droneapi.mock.api.IUrbanizationID;
+import com.id.droneapi.mock.api.IDealistaAPI;
 import com.id.droneapi.mock.exception.DirectionNotFound;
 import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
 import com.id.droneapi.mock.exception.NoAdjacentNode;
@@ -28,8 +28,8 @@ public class DroneAPI implements IDroneAPI {
      * Dependency Injection of IDealistaAPI Dependency Injection of
      * INeighborhoodsAlgorithm
      *
-     * @param api
-     * @param algorithm
+     * @param api the Idealista api
+     * @param algorithm The algorithm implementation
      */
     public DroneAPI(IDealistaAPI api, INeighborhoodsAlgorithm algorithm) {
         this.api = api;

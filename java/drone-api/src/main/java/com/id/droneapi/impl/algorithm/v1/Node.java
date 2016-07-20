@@ -1,7 +1,7 @@
 package com.id.droneapi.impl.algorithm.v1;
 
 import java.util.Objects;
-import com.id.droneapi.mock.API.IUrbanizationID;
+import com.id.droneapi.mock.api.IUrbanizationID;
 
 public class Node {
 

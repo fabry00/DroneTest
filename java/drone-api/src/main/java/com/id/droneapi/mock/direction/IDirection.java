@@ -22,11 +22,11 @@ public interface IDirection {
     /**
      * Given a source's coordinates return the coordinates of the node adjacent
      * node in the specified direction.
-     * @param sorceNodeCoord
-     * @param matrixWidth
-     * @param matrixHeight
-     * @return
-     * @throws NoAdjacentNode 
+     * @param sorceNodeCoord the source node coordinates
+     * @param matrixWidth matrix width
+     * @param matrixHeight matrix height
+     * @return the Cordinates
+     * @throws NoAdjacentNode The exception 
      */
     public Coord getAdjacentCoord(Coord sorceNodeCoord,
             int matrixWidth, int matrixHeight) throws NoAdjacentNode;

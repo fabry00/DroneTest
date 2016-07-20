@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.id.droneapi.mock.API.DirectionID;
+import com.id.droneapi.mock.api.DirectionID;
 import com.id.droneapi.mock.exception.DirectionNotFound;
 
 /**
@@ -29,11 +29,11 @@ public class DirectionFactory {
 
     /**
      * Create an instance of the specific IDirection
-     * @param directionID
+     * @param directionID the direction
      * @param rows Matrix rows
      * @param col Matrix columns
-     * @return
-     * @throws DirectionNotFound 
+     * @return the direction
+     * @throws DirectionNotFound  the exception
      */
     public IDirection createDirection(DirectionID directionID, int rows, int col)
             throws DirectionNotFound {

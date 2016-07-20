@@ -2,8 +2,8 @@ package com.id.droneapi.mock;
 
 import java.util.ArrayList;
 import com.id.droneapi.mock.exception.NoAdjacentNode;
-import com.id.droneapi.mock.API.IDealistaAPI;
-import com.id.droneapi.mock.API.IUrbanizationID;
+import com.id.droneapi.mock.api.IDealistaAPI;
+import com.id.droneapi.mock.api.IUrbanizationID;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.id.droneapi.mock.API.DirectionID;
+import com.id.droneapi.mock.api.DirectionID;
 import com.id.droneapi.mock.exception.DirectionNotFound;
 import com.id.droneapi.mock.exception.NodeAlreadyAdded;
 import com.id.droneapi.mock.exception.NodeNotFound;
@@ -44,10 +44,10 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Given a node's coordinates return the ID of the node
-     * @param x
-     * @param y
-     * @return
-     * @throws NodeNotFound 
+     * @param y coordinate Y for the inputNode 
+     * @param x coordinate X for the inputNode
+     * @return the node id
+     * @throws NodeNotFound the exception 
      */
     @Override
     public IUrbanizationID getUrbanizationID(double x, double y)
@@ -58,12 +58,12 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Given a node ID and a Direction return the adjacent node
-     * @param id
-     * @param diretcionID
-     * @return
-     * @throws NoAdjacentNode
-     * @throws NodeNotFound
-     * @throws DirectionNotFound 
+     * @param id the node id
+     * @param diretcionID the direction
+     * @return the node id
+     * @throws NoAdjacentNode The exception
+     * @throws NodeNotFound The exception
+     * @throws DirectionNotFound The exception
      */
     @Override
     public IUrbanizationID getAdjacent(String id, String diretcionID)
@@ -76,12 +76,12 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Given a node ID and a Direction return the adjacent node
-     * @param id
-     * @param diretcionID
-     * @return
-     * @throws NoAdjacentNode
-     * @throws NodeNotFound
-     * @throws DirectionNotFound 
+     * @param id the node id
+     * @param diretcionID the direction
+     * @return the node id
+     * @throws NoAdjacentNode The exception
+     * @throws NodeNotFound The exception
+     * @throws DirectionNotFound The exception
      */
     @Override
     public IUrbanizationID getAdjacent(IUrbanizationID id, DirectionID diretcionID)
@@ -101,7 +101,7 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Print the Matrix in a pretty way 
-     * @return 
+     * @return the String
      */
     @Override
     public String toString() {

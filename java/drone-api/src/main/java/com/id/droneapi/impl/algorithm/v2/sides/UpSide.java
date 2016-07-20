@@ -1,6 +1,6 @@
 package com.id.droneapi.impl.algorithm.v2.sides;
 
-import com.id.droneapi.mock.API.DirectionID;
+import com.id.droneapi.mock.api.DirectionID;
 import java.util.ArrayList;
 import java.util.List;
 

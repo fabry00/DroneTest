@@ -1,4 +1,4 @@
-package com.id.droneapi.mock.API;
+package com.id.droneapi.mock.api;
 
 import com.id.droneapi.mock.exception.DirectionNotFound;
 import com.id.droneapi.mock.exception.NoAdjacentNode;
@@ -20,10 +20,10 @@ public interface IDealistaAPI {
      * obtenerIdentificadorUrbanización(coordenadaX, coordenadaY) =
      *                                                 identificadorUrbanización
      *
-     * @param x
-     * @param y
-     * @return
-     * @throws com.id.droneapi.mock.exception.NodeNotFound
+     * @param x coordinate X for the inputNode
+     * @param y coordinate Y for the inputNode 
+     * @return The node id
+     * @throws com.id.droneapi.mock.exception.NodeNotFound The exception
      */
     public IUrbanizationID getUrbanizationID(double x, double y)
             throws NodeNotFound;
@@ -32,12 +32,12 @@ public interface IDealistaAPI {
      * public getobtenerAdyacente(identificadorUrbanizaciónOrigen, dirección) =
      *                                                    identificadorAdyacente
      *
-     * @param id
-     * @param diretcionID
-     * @return
-     * @throws NoAdjacentNode
-     * @throws com.id.droneapi.mock.exception.NodeNotFound
-     * @throws com.id.droneapi.mock.exception.DirectionNotFound
+     * @param id source node id
+     * @param diretcionID adjacent direction
+     * @return the adjacent node
+     * @throws NoAdjacentNode The exception
+     * @throws com.id.droneapi.mock.exception.NodeNotFound The exception
+     * @throws com.id.droneapi.mock.exception.DirectionNotFound The exception
      */
     public IUrbanizationID getAdjacent(String id, String diretcionID)
             throws NoAdjacentNode, NodeNotFound, DirectionNotFound;
@@ -49,12 +49,12 @@ public interface IDealistaAPI {
      * Overloaded method using IUrbanizationID and DirectionID class instead of
      * String
      *
-     * @param id
-     * @param diretcionID
-     * @return
-     * @throws com.id.droneapi.mock.exception.NoAdjacentNode
-     * @throws com.id.droneapi.mock.exception.NodeNotFound
-     * @throws com.id.droneapi.mock.exception.DirectionNotFound
+     * @param id source node id
+     * @param diretcionID the direction
+     * @return the adjacent node id
+     * @throws com.id.droneapi.mock.exception.NoAdjacentNode The exception
+     * @throws com.id.droneapi.mock.exception.NodeNotFound The exception
+     * @throws com.id.droneapi.mock.exception.DirectionNotFound The exception
      */
     public IUrbanizationID getAdjacent(IUrbanizationID id, DirectionID diretcionID)
             throws NoAdjacentNode, NodeNotFound,DirectionNotFound;
