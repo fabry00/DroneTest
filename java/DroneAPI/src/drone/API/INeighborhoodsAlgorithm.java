@@ -9,7 +9,7 @@ import drone.API.exception.NeighborhoodsAlgorithmEx;
  * Interface for the Algorithm to search the Neighborhoods of a node.
  * 
  * The algorithm will be injected using this interface. This gives the possibility
- * to change the implementantion algorithm if in the feauture a better one will
+ * to change the implementation algorithm if in the feature a better one will
  * be discovered
  * 
  * @author Fabrizio Faustinoni
@@ -28,4 +28,6 @@ public interface INeighborhoodsAlgorithm {
      */
     List<IUrbanizationID> getNeighborhoods(double x, double y, int range, IDealistaAPI api)
             throws NeighborhoodsAlgorithmEx;
+    
+    public void setScandDirection(IScanDirection direction);
 }
