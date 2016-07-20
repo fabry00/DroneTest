@@ -86,10 +86,10 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
      * @return
      */
     private Neighborhoods initStartingNeighborhoods(IUrbanizationID startingNode, IDealistaAPI api) {
-        return new Neighborhoods(new Node(startingNode, api),
-                new Node(startingNode, api),
-                new Node(startingNode, api),
-                new Node(startingNode, api),
+        return new Neighborhoods(new Node(startingNode),
+                new Node(startingNode),
+                new Node(startingNode),
+                new Node(startingNode),
                 startingNode);
     }
 }
