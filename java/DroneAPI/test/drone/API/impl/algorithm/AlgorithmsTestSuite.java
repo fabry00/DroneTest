@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- *
- * @author exfaff
+ * Algorithms Test suite
+ * @author Fabrizio Faustinoni
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({NeighborhoodsAlgorithmTest.class, NeighborhoodsAlgorithmV2Test.class})
