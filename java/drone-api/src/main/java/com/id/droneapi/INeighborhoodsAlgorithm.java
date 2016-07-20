@@ -1,0 +1,33 @@
+package com.id.droneapi;
+
+import com.id.droneapi.mock.API.IUrbanizationID;
+import com.id.droneapi.mock.API.IDealistaAPI;
+import java.util.List;
+import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
+
+/**
+ * Interface for the Algorithm to search the Neighborhoods of a node.
+ * 
+ * The algorithm will be injected using this interface. This gives the possibility
+ * to change the implementation algorithm if in the feature a better one will
+ * be discovered
+ * 
+ * @author Fabrizio Faustinoni
+ */
+public interface INeighborhoodsAlgorithm {
+    
+    /**
+     * Given a node's coordinates, a range return the Neighborhoods of the node
+     * at that range
+     * @param x
+     * @param y
+     * @param range
+     * @param api
+     * @return
+     * @throws NeighborhoodsAlgorithmEx 
+     */
+    List<IUrbanizationID> getNeighborhoods(double x, double y, int range, IDealistaAPI api)
+            throws NeighborhoodsAlgorithmEx;
+    
+    public void setScandDirection(IScanDirection direction);
+}
