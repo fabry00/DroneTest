@@ -1,7 +1,7 @@
-package drone.API.impl.v1.vertex;
+package drone.API.impl.algorithm.v1.vertex;
 
 import drone.API.exception.NeighborhoodsAlgorithmEx;
-import drone.API.impl.v1.Node;
+import drone.API.impl.algorithm.v1.Node;
 import drone.mock.API.DirectionID;
 import drone.mock.API.IDealistaAPI;
 import drone.mock.API.IUrbanizationID;

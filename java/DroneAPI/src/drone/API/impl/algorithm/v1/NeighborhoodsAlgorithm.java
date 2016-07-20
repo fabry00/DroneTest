@@ -1,6 +1,5 @@
-package drone.API.impl.v1;
+package drone.API.impl.algorithm.v1;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import drone.mock.API.DirectionID;
@@ -13,11 +12,11 @@ import java.util.logging.Level;
 
 public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
 
-    private static final DirectionID STARTING_DIRECTION = DirectionID.UP;
-    private static final ScanDirection SCAN_DIRECTION = ScanDirection.CLOCKWISE;
+    protected static final DirectionID STARTING_DIRECTION = DirectionID.UP;
+    protected static final ScanDirection SCAN_DIRECTION = ScanDirection.CLOCKWISE;
 
     private static final Logger logger = Logger.getLogger(NeighborhoodsAlgorithm.class.getName());
-    private IDealistaAPI api;
+    protected IDealistaAPI api;
 
     @Override
     public List<IUrbanizationID> getNeighborhoods(double x, double y, int range,
@@ -40,6 +39,8 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
         List<IUrbanizationID> ids = neighborhoods.getNodesIDs();
         long elapsedTime = System.nanoTime() - start;
 
+         logger.log(Level.INFO, "Neighborhoods: {0}", new Object[]{ids});
+        
         logger.log(Level.INFO, "Algorithm profile. Range: {0} Time(ms): {1}",
                 new Object[]{range, elapsedTime / 1000 / 1000});
         return ids;
@@ -53,7 +54,7 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
      * @return
      * @throws NeighborhoodsAlgorithmEx
      */
-    private Neighborhoods calculateNeighborhoods(int range, IUrbanizationID startingNode)
+    protected Neighborhoods calculateNeighborhoods(int range, IUrbanizationID startingNode)
             throws NeighborhoodsAlgorithmEx {
 
         if (range <= 0) {
@@ -67,13 +68,16 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
         int currentRange = 1;
         // Calculating ONLY the Neighborhoods vertices until we reach the desired range
         while (currentRange <= range) {
-            lastNeighborhoods = lastNeighborhoods.calculateParentVertices(api, SCAN_DIRECTION);
+            Neighborhoods newNeighborhoods = lastNeighborhoods.calculateParentVertices(api, SCAN_DIRECTION);
+            newNeighborhoods.calculateNeighborhoodsNodes(lastNeighborhoods, api, SCAN_DIRECTION);
+            
+            lastNeighborhoods = newNeighborhoods;
             currentRange++;
         }
 
         // in lastNeighborhoods we have stored the Neighborhoods vertices of the
         // desired range Neighborhoods. Now we retrieve the full list of the Neighborhoods
-        lastNeighborhoods.calculateNeighborhoodsNodes(api, SCAN_DIRECTION);
+        //lastNeighborhoods.calculateNeighborhoodsNodes(api, SCAN_DIRECTION);
         return lastNeighborhoods;
     }
 
@@ -85,7 +89,7 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
      * @param api
      * @return
      */
-    private Neighborhoods initStartingNeighborhoods(IUrbanizationID startingNode, IDealistaAPI api) {
+    protected Neighborhoods initStartingNeighborhoods(IUrbanizationID startingNode, IDealistaAPI api) {
         return new Neighborhoods(new Node(startingNode),
                 new Node(startingNode),
                 new Node(startingNode),

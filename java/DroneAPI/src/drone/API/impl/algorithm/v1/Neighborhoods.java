@@ -1,4 +1,4 @@
-package drone.API.impl.v1;
+package drone.API.impl.algorithm.v1;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -13,11 +13,11 @@ import drone.mock.API.IDealistaAPI;
 import drone.mock.API.IUrbanizationID;
 import drone.mock.exception.DirectionNotFound;
 import drone.API.exception.NeighborhoodsAlgorithmEx;
-import drone.API.impl.v1.vertex.BottomLeft;
-import drone.API.impl.v1.vertex.BottomRight;
-import drone.API.impl.v1.vertex.IVertex;
-import drone.API.impl.v1.vertex.UpperLeft;
-import drone.API.impl.v1.vertex.UpperRight;
+import drone.API.impl.algorithm.v1.vertex.BottomLeft;
+import drone.API.impl.algorithm.v1.vertex.BottomRight;
+import drone.API.impl.algorithm.v1.vertex.IVertex;
+import drone.API.impl.algorithm.v1.vertex.UpperLeft;
+import drone.API.impl.algorithm.v1.vertex.UpperRight;
 import drone.mock.exception.NoAdjacentNode;
 import drone.mock.exception.NodeNotFound;
 import java.util.Collections;
@@ -106,26 +106,27 @@ public class Neighborhoods {
     public Neighborhoods calculateParentVertices(IDealistaAPI api,
             ScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
 
-        Map<NodeType, Node> vertices = retreiveParentVertices(api);
+        Map<NodeType, Node> verticesTmp = retreiveParentVertices(api);
 
-        return new Neighborhoods(vertices.get(NodeType.NORTHERN_WEST),
-                vertices.get(NodeType.NORTHERN_EST),
-                vertices.get(NodeType.SOUTHERN_WEST),
-                vertices.get(NodeType.SOUTHERN_EST),
+        return new Neighborhoods(verticesTmp.get(NodeType.NORTHERN_WEST),
+                verticesTmp.get(NodeType.NORTHERN_EST),
+                verticesTmp.get(NodeType.SOUTHERN_WEST),
+                verticesTmp.get(NodeType.SOUTHERN_EST),
                 centralNode);
     }
 
     /**
      * Calculate all the NeighborhoodsNodes
      *
+     * @param parentNeighborhoods
      * @param api
      * @param scandDirection
      * @throws NeighborhoodsAlgorithmEx
      */
-    public void calculateNeighborhoodsNodes(IDealistaAPI api,
-            ScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
+    public void calculateNeighborhoodsNodes(Neighborhoods parentNeighborhoods,
+            IDealistaAPI api, ScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
 
-        List<Node> nodes = getNeighborhoodNodes(api, scandDirection, vertices);
+        List<Node> nodes = getNeighborhoodNodes(parentNeighborhoods.getNodesIDs(), api, scandDirection, vertices);
         this.neighborNodes = Collections.unmodifiableList(nodes);
     }
 
@@ -140,13 +141,13 @@ public class Neighborhoods {
 
         IVertex vertex = new UpperLeft();
         Node northernWest = vertex.getNode(getNorthernWest().getId(), api);
-        
+
         vertex = new UpperRight();
         Node northernEst = vertex.getNode(getNorthernEst().getId(), api);
-        
+
         vertex = new BottomRight();
         Node southernEst = vertex.getNode(getSouthernEst().getId(), api);
-        
+
         vertex = new BottomLeft();
         Node southernWest = vertex.getNode(getSouthernWest().getId(), api);
 
@@ -161,8 +162,8 @@ public class Neighborhoods {
         return parentVerticesNodes;
     }
 
-    private List<Node> getNeighborhoodNodes(IDealistaAPI api,
-            ScanDirection scandDirection, Map<NodeType, Node> vertices)
+    private List<Node> getNeighborhoodNodes(List<IUrbanizationID> parentNodes,
+            IDealistaAPI api, ScanDirection scandDirection, Map<NodeType, Node> vertices)
             throws NeighborhoodsAlgorithmEx {
 
         List<Node> neighborhoodNodes = new ArrayList<>();
@@ -199,12 +200,17 @@ public class Neighborhoods {
                             continue;
                         }
                         logger.log(Level.INFO, "Adding node {0} as neighbor", adjacentId);
-                        neighborhoodNodes.add(new Node(adjacentId));
+
+                        Node nodeToAdd = new Node(adjacentId);
+                        if (!parentNodes.contains(adjacentId)) {
+                            neighborhoodNodes.add(nodeToAdd);
+                        }
+                        currentNode = nodeToAdd;
                     } else {
                         // The currentNode is the same of the cardinal limit
                         adjacentId = currentNode.getId();
                     }
-                    currentNode = neighborhoodNodes.get(neighborhoodNodes.size() - 1);
+
                     if (limitNode != null && limitNode.getId().equals(adjacentId)) {
                         // Reached limit
                         break;

@@ -1,5 +1,6 @@
 package drone.API;
 
+import drone.API.exception.NeighborhoodsAlgorithmEx;
 import drone.mock.API.IUrbanizationID;
 import drone.mock.API.IDealistaAPI;
 import java.util.List;
@@ -22,6 +23,8 @@ public interface IDroneAPI extends IDealistaAPI{
      * @param y
      * @param range
      * @return 
+     * @throws drone.API.exception.NeighborhoodsAlgorithmEx 
      */
-    List<IUrbanizationID> getNeighborhoods(double x, double y, int range);
+    List<IUrbanizationID> getNeighborhoods(double x, double y, int range)
+            throws NeighborhoodsAlgorithmEx;
 }

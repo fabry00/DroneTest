@@ -36,13 +36,11 @@ public class DroneAPI implements IDroneAPI {
     }
 
     @Override
-    public List<IUrbanizationID> getNeighborhoods(double x, double y, int range) {
+    public List<IUrbanizationID> getNeighborhoods(double x, double y, int range)
+                throws NeighborhoodsAlgorithmEx{
         List<IUrbanizationID> nodes = new ArrayList<>();
-        try {
-            nodes.addAll(this.algorithm.getNeighborhoods(x, y, range, api));
-        } catch (NeighborhoodsAlgorithmEx ex) {
-            Logger.getLogger(DroneAPI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        nodes.addAll(this.algorithm.getNeighborhoods(x, y, range, api));
         
         return Collections.unmodifiableList(nodes);
     }
