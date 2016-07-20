@@ -18,7 +18,7 @@ public class TestCaseBuilder {
      * 
      * @return 
      */
-    public TestCase testGetNeighborhoods1() {
+    public TestCase testCase1() {
         return new TestCase.Builder()
                 .withStartingNode(2, 2)
                 .withRange(1)
@@ -50,7 +50,7 @@ public class TestCaseBuilder {
      * 
      * @return 
      */
-    public TestCase testGetNeighborhoods2() {
+    public TestCase testCase2() {
         return new TestCase.Builder()
                 .withStartingNode(2, 2)
                 .withRange(2)
@@ -89,7 +89,7 @@ public class TestCaseBuilder {
      * 
      * @return 
     */
-    public TestCase testGetNeighborhoods3() {
+    public TestCase testCase3() {
         
         return new TestCase.Builder()
                 .withStartingNode(2, 2)
@@ -107,7 +107,7 @@ public class TestCaseBuilder {
      * 
      * @return 
      */
-    public TestCase testGetNeighborhoods4() {
+    public TestCase testCase4() {
         
         return new TestCase.Builder()
                 .withStartingNode(0, 0)
@@ -129,7 +129,7 @@ public class TestCaseBuilder {
      * 07(0.0,2.0) 08(1.0,2.0) 09(2.0,2.0)
      * @return 
      */
-    public TestCase testGetNeighborhoods5() {
+    public TestCase testCase5() {
         
         return new TestCase.Builder()
                 .withStartingNode(2, 0)
@@ -151,7 +151,7 @@ public class TestCaseBuilder {
      * 07(0.0,2.0) 08(1.0,2.0) 09(2.0,2.0)
      * @return 
      */
-    public TestCase testGetNeighborhoods6() {
+    public TestCase testCase6() {
         
         return new TestCase.Builder()
                 .withStartingNode(2, 2)
@@ -173,7 +173,7 @@ public class TestCaseBuilder {
      * 07(0.0,2.0) 08(1.0,2.0) 09(2.0,2.0)
      * @return 
      */
-    public TestCase testGetNeighborhoods7() {
+    public TestCase testCase7() {
         
         return new TestCase.Builder()
                 .withStartingNode(0, 2)
@@ -194,7 +194,7 @@ public class TestCaseBuilder {
      * 07(0.0,2.0) 08(1.0,2.0) 09(2.0,2.0)
      * @return 
      */
-    public TestCase testGetNeighborhoods8() {
+    public TestCase testCase8() {
         
         return new TestCase.Builder()
                 .withStartingNode(0, 1)
@@ -218,7 +218,7 @@ public class TestCaseBuilder {
      * 07(0.0,2.0) 08(1.0,2.0) 09(2.0,2.0)
      * @return 
      */
-    public TestCase testGetNeighborhoods9() {
+    public TestCase testCase9() {
         
         return new TestCase.Builder()
                 .withStartingNode(1, 0)
@@ -241,7 +241,7 @@ public class TestCaseBuilder {
      * 07(0.0,2.0) 08(1.0,2.0) 09(2.0,2.0)
      * @return 
      */
-    public TestCase testGetNeighborhoods10() {
+    public TestCase testCase10() {
         
         return new TestCase.Builder()
                 .withStartingNode(2, 1)
@@ -264,7 +264,7 @@ public class TestCaseBuilder {
      * 07(0.0,2.0) 08(1.0,2.0) 09(2.0,2.0)
      * @return 
      */
-    public TestCase testGetNeighborhoods11() {
+    public TestCase testCase11() {
         
         return new TestCase.Builder()
                 .withStartingNode(1, 2)
@@ -293,7 +293,7 @@ public class TestCaseBuilder {
      * 
      * @return 
      */
-    public TestCase testGetNeighborhoods12() {
+    public TestCase testCase12() {
         return new TestCase.Builder()
                 .withStartingNode(4, 4)
                 .withRange(3)
@@ -327,7 +327,7 @@ public class TestCaseBuilder {
      * 
      * @return 
      */
-    public TestCase testGetNeighborhoods13() {
+    public TestCase testCase13() {
         
         return new TestCase.Builder()
                 .withStartingNode(3, 3)
@@ -347,7 +347,7 @@ public class TestCaseBuilder {
      *
      * @return 
      */
-    public TestCase testGetNeighborhoods14() {
+    public TestCase testCase14() {
         
         return new TestCase.Builder()
                 .withStartingNode(2, 1)
@@ -382,7 +382,7 @@ public class TestCaseBuilder {
      *
      * @return 
      */
-    public TestCase testGetNeighborhoods15() {
+    public TestCase testCase15() {
         
         return new TestCase.Builder()
                 .withStartingNode(2, 1)

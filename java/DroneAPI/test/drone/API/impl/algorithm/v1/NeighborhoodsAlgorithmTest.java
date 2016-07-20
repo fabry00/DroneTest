@@ -54,96 +54,96 @@ public class NeighborhoodsAlgorithmTest {
     }
 
     @Test
-    public void testGetNeighborhoods1() throws Exception {
+    public void testNeighborhoodsV1_1() throws Exception {
 
-        TestCase test = testBuilder.testGetNeighborhoods1();
+        TestCase test = testBuilder.testCase1();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods2() throws Exception {
+    public void testNeighborhoodsV1_2() throws Exception {
 
-        TestCase test = testBuilder.testGetNeighborhoods2();
+        TestCase test = testBuilder.testCase2();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods3() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods3();
+    public void testNeighborhoodsV1_3() throws Exception {
+        TestCase test = testBuilder.testCase3();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods4() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods4();
+    public void testNeighborhoodsV1_4() throws Exception {
+        TestCase test = testBuilder.testCase4();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods5() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods5();
+    public void testNeighborhoodsV1_5() throws Exception {
+        TestCase test = testBuilder.testCase5();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods6() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods6();
+    public void testNeighborhoodsV1_6() throws Exception {
+        TestCase test = testBuilder.testCase6();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods7() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods7();
+    public void testNeighborhoodsV1_7() throws Exception {
+        TestCase test = testBuilder.testCase7();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods8() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods8();
+    public void testNeighborhoodsV1_8() throws Exception {
+        TestCase test = testBuilder.testCase8();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods9() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods9();
-        executeTest(test);
-    }
-
-    @Test
-
-    public void testGetNeighborhoods10() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods10();
-        executeTest(test);
-    }
-
-    @Test
-    public void testGetNeighborhoods11() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods11();
+    public void testNeighborhoodsV1_9() throws Exception {
+        TestCase test = testBuilder.testCase9();
         executeTest(test);
     }
 
     @Test
 
-    public void testGetNeighborhoods12() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods12();
+    public void testNeighborhoodsV1_10() throws Exception {
+        TestCase test = testBuilder.testCase10();
+        executeTest(test);
+    }
+
+    @Test
+    public void testNeighborhoodsV1_11() throws Exception {
+        TestCase test = testBuilder.testCase11();
+        executeTest(test);
+    }
+
+    @Test
+
+    public void testNeighborhoodsV1_12() throws Exception {
+        TestCase test = testBuilder.testCase12();
         executeTest(test);
     }
 
     @Test(expected = NeighborhoodsAlgorithmEx.class)
-    public void testGetNeighborhoods13() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods13();
+    public void testNeighborhoodsV1_13() throws Exception {
+        TestCase test = testBuilder.testCase13();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods14() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods14();
+    public void testNeighborhoodsV1_14() throws Exception {
+        TestCase test = testBuilder.testCase14();
         executeTest(test);
     }
 
     @Test
-    public void testGetNeighborhoods15() throws Exception {
-        TestCase test = testBuilder.testGetNeighborhoods15();
+    public void testNeighborhoodsV1_15() throws Exception {
+        TestCase test = testBuilder.testCase15();
         executeTest(test);
     }
 
@@ -151,7 +151,7 @@ public class NeighborhoodsAlgorithmTest {
     /**
      * InputNode (0,0) range: 1 01(0.0,0.0) 02(1.0,0.0) 03(2.0,0.0)
      */
-    /*public void testGetNeighborhoods14() throws Exception {
+    /*public void testNeighborhoodsV1_14() throws Exception {
      // Input node coords
      int x = 0;
      int y = 0;
@@ -182,7 +182,7 @@ public class NeighborhoodsAlgorithmTest {
     /**
      * InputNode (0,0) range: 1 01(0.0,0.0) 02(0.0,1.0) 03(0.0,2.0)
      */
-    /*public void testGetNeighborhoods15() throws Exception {
+    /*public void testNeighborhoodsV1_15() throws Exception {
      // Input node coords
      int x = 0;
      int y = 0;

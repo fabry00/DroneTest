@@ -8,8 +8,8 @@ public class UpSide extends Side implements ISide {
 
     private static final List<DirectionID> STARTING_NODE_DIRECTIONS = new ArrayList<DirectionID>() {
         {
-            add(DirectionID.UP);
             add(DirectionID.LEFT);
+            add(DirectionID.UP);            
         }
     };
     

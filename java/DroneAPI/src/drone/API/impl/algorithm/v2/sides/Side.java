@@ -74,11 +74,7 @@ public abstract class Side {
                     // Not an error
                     failingAttempts++;
                     found = false;
-                    if (isFirstSide) {
-                        // Stop searching
-                        return new AbstractMap.SimpleEntry(null, failingAttempts);
-                    }
-                    // ELSE
+                    
                     // Change direction
                     break;
 
