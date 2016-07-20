@@ -181,5 +181,15 @@ public class NeighborhoodsAlgorithmV2Test {
         TestCase test = testBuilder.testCase15();
         executeTest(test);
     }
+    
+    
+    /**
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testNeighborhoodsV2_16() throws Exception {
+        TestCase test = testBuilder.testCase16();
+        executeTest(test);
+    }
 
 }

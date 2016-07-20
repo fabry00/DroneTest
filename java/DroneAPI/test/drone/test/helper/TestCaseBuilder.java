@@ -399,4 +399,55 @@ public class TestCaseBuilder {
                 }})
                 .build(id++);    
     }
+    
+    
+    /**
+     * InputNode (0,0) range: 1
+     * 01(0.0,0.0) 02(1.0,0.0) 03(2.0,0.0)
+     * 
+     * @return 
+     */
+    public TestCase testCase16() {
+        
+        return new TestCase.Builder()
+                .withStartingNode(0, 0)
+                .withRange(1)
+                .withUbMatrix(3, 1)
+                .withExpected(new ArrayList<IUrbanizationID>(){{
+                    add(helper.getId(2));
+                }})
+                .build(id++); 
+    }  
+   
+    //@Test
+    /**
+     * InputNode (0,0) range: 1 01(0.0,0.0) 02(0.0,1.0) 03(0.0,2.0)
+     */
+    /*public void testNeighborhoodsV1_15() throws Exception {
+     // Input node coords
+     int x = 0;
+     int y = 0;
+     int range = 1;
+     // urbanizationMatrix dimensions
+     int width = 1;
+     int height = 3;
+        
+        
+     List<IUrbanizationID> expected = new ArrayList<IUrbanizationID>(){
+     {
+     add(helper.getId(2));
+     }
+     };
+
+     IDealistaAPI api = helper.getIdealistaAPI(width, height);
+     ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
+
+     System.out.println("Test 14");
+     System.out.println("InputNode ("+x+","+y+") range: "+range);
+     // Print the matrix
+     System.out.println(api);
+        
+     List<IUrbanizationID> actual = testDrone.getNeighborhoods(x, y, range);
+     assertEquals(expected, actual);
+     }*/
 }

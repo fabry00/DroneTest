@@ -2,32 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/mock/Node.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/subalgorithm/BottomLeftCentralNode.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/TestID.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/direction/LeftDirection.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/INeighborhoodsAlgorithm.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/subalgorithm/UpperRightCentrlNode.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/subalgorithm/UpperLeftCentralNode.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/subalgorithm/INeighborhoodsSubAlgorithm.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/Node.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/mock/direction/UpDirection.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/direction/IDirectionAlgorithm.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/Neighborhoods.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/direction/UpDirection.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/mock/direction/BaseDirection.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/subalgorithm/GeneralAlgorithm.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/direction/DirectionFactory.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/subalgorithm/NeighborhoodsSubAlgorithmFactory.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/direction/DownDirection.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/subalgorithm/BottomRightCentralNode.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/mock/direction/DirectionFactory.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/direction/BaseDirection.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/ScanDirection.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/NeighborhoodsAlgorithm.java</file>
-            <file>file:/C:/Users/EXFAFF/Documents/General/mine/test/Projects/DroneTest/DroneTest/testID/src/testid/idgraph/API/impl/v1/direction/RightDirection.java</file>
-        </group>
         <group name="DroneTest"/>
+        <group/>
     </open-files>
 </project-private>
