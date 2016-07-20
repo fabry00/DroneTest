@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.logging.Logger;
 import com.id.droneapi.mock.api.IDealistaAPI;
 import com.id.droneapi.INeighborhoodsAlgorithm;
-import com.id.droneapi.IScanDirection;
 import com.id.droneapi.mock.api.IUrbanizationID;
 import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
 import com.id.droneapi.mock.exception.NodeNotFound;
@@ -15,11 +14,7 @@ public class NeighborhoodsAlgorithmV2 implements INeighborhoodsAlgorithm {
     private static final Logger logger = Logger.getLogger(NeighborhoodsAlgorithmV2.class.getName());
     private IDealistaAPI api;
 
-    @Override
-    public void setScandDirection(IScanDirection direction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public List<IUrbanizationID> getNeighborhoods(double x, double y, int range,
             IDealistaAPI api)

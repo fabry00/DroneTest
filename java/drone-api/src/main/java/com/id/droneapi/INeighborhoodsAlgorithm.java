@@ -29,11 +29,5 @@ public interface INeighborhoodsAlgorithm {
      */
     List<IUrbanizationID> getNeighborhoods(double x, double y, int range, IDealistaAPI api)
             throws NeighborhoodsAlgorithmEx;
-
-    /**
-     * Set the scan direction
-     *
-     * @param direction the direction
-     */
-    public void setScandDirection(IScanDirection direction);
+    
 }

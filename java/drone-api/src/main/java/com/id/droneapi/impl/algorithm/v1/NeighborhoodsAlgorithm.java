@@ -7,22 +7,27 @@ import com.id.droneapi.INeighborhoodsAlgorithm;
 import com.id.droneapi.IScanDirection;
 import com.id.droneapi.mock.api.IUrbanizationID;
 import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
-import com.id.droneapi.impl.algorithm.v1.scandirection.Clockwise;
+import com.id.droneapi.impl.algorithm.v1.scandirection.ClockWise;
 import com.id.droneapi.impl.algorithm.v1.scandirection.IScanDirectionV1;
 import com.id.droneapi.mock.exception.NodeNotFound;
 import java.util.logging.Level;
 
 public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
 
-    private static final IScanDirection DEFAULT_SCAN_DIRECTION = new Clockwise();
+    private static IScanDirection SCAN_DIRECTION = new ClockWise();
 
     private static final Logger logger = Logger.getLogger(NeighborhoodsAlgorithm.class.getName());
     private IDealistaAPI api;
-    private IScanDirection scandDirection = DEFAULT_SCAN_DIRECTION;
-    
-    @Override
-    public void setScandDirection(IScanDirection direction) {
-        this.scandDirection  = direction;
+    private IScanDirection scanDirection = SCAN_DIRECTION;
+
+    /**
+     * Constructor
+     * @param scanDirection the scan direction implemetnation
+     */
+    public NeighborhoodsAlgorithm(IScanDirection scanDirection) {
+        if (scanDirection != null) {
+            this.scanDirection = scanDirection;
+        }
     }
 
     @Override
@@ -46,8 +51,8 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
         List<IUrbanizationID> ids = neighborhoods.getNodesIDs();
         long elapsedTime = System.nanoTime() - start;
 
-         logger.log(Level.INFO, "Neighborhoods: {0}", new Object[]{ids});
-        
+        logger.log(Level.INFO, "Neighborhoods: {0}", new Object[]{ids});
+
         logger.log(Level.INFO, "Algorithm profile. Range: {0} Time(ms): {1}",
                 new Object[]{range, elapsedTime / 1000 / 1000});
         return ids;
@@ -76,11 +81,11 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
         // Calculating the Neighborhoods until we reach the desired range
         while (currentRange <= range) {
             // Calcuate the new Neighborhoods Vertex
-            Neighborhoods newNeighborhoods = lastNeighborhoods.calculateParentVertices(api, scandDirection);
+            Neighborhoods newNeighborhoods = lastNeighborhoods.calculateParentVertices(api, scanDirection);
             // Calculate the NeighborhoodsNodes
-            newNeighborhoods.calculateNeighborhoodsNodes(lastNeighborhoods, api, 
-                    (IScanDirectionV1)scandDirection);
-            
+            newNeighborhoods.calculateNeighborhoodsNodes(lastNeighborhoods, api,
+                    (IScanDirectionV1) scanDirection);
+
             lastNeighborhoods = newNeighborhoods;
             currentRange++;
         }
@@ -104,5 +109,4 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
                 startingNode);
     }
 
-    
 }

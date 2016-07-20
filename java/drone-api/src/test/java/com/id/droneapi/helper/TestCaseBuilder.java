@@ -41,6 +41,7 @@ public class TestCaseBuilder {
 
     }
     
+    
     /**
      * InputNode (2,2) range: 2
      * 01(0.0,0.0)  02(1.0,0.0)  03(2.0,0.0)  04(3.0,0.0)  05(4.0,0.0)            
@@ -96,7 +97,7 @@ public class TestCaseBuilder {
                 .withStartingNode(2, 2)
                 .withRange(3)
                 .withUbMatrix(5, 5)
-                .withExpected(new ArrayList<IUrbanizationID>())
+                .withExpected(new ArrayList<>())
                 .build(id++);
     }
     

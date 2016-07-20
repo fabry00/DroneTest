@@ -18,17 +18,17 @@ public class CounterClockWise implements IScanDirectionV1 {
     private static final List<NodeType> VERTICES = new ArrayList<Neighborhoods.NodeType>() {
         {
             add(Neighborhoods.NodeType.NORTHERN_WEST);
-            add(Neighborhoods.NodeType.NORTHERN_EST);
-            add(Neighborhoods.NodeType.SOUTHERN_EST);
             add(Neighborhoods.NodeType.SOUTHERN_WEST);
+            add(Neighborhoods.NodeType.SOUTHERN_EST);
+            add(Neighborhoods.NodeType.NORTHERN_EST);
         }
     };
     private static final List<DirectionID> DIRECTIONS = new ArrayList<DirectionID>() {
         {
-            add(DirectionID.LEFT);
             add(DirectionID.DOWN);
             add(DirectionID.RIGHT);
             add(DirectionID.UP);
+            add(DirectionID.LEFT);
         }
     };
 
@@ -53,8 +53,8 @@ public class CounterClockWise implements IScanDirectionV1 {
             index++;
         }
 
-        return index == 0
-                ? orderedDir.get(orderedDir.size() - 1) : orderedDir.get(index - 1);
+        return index == orderedDir.size() - 1
+                ? orderedDir.get(0) : orderedDir.get(index + 1);
 
     }
 
@@ -72,10 +72,9 @@ public class CounterClockWise implements IScanDirectionV1 {
         List<NodeType> verticesOrdered = getVertexOrdered();
         // FIXME TO UPDATE
         DirectionID currentDirection = DirectionID.DOWN;
-        for (int i = verticesOrdered.size() - 1; i >= 0; i--) {
-            if (parentVerticesNodes.get(verticesOrdered.get(i)) != null) {
-                return new AbstractMap.SimpleEntry(parentVerticesNodes.get(verticesOrdered.get(i)),
-                        currentDirection);
+        for (Neighborhoods.NodeType nodeType : verticesOrdered) {
+            if (parentVerticesNodes.get(nodeType) != null) {
+                return new AbstractMap.SimpleEntry(parentVerticesNodes.get(nodeType), currentDirection);
             }
             currentDirection = getNext(currentDirection);
         }

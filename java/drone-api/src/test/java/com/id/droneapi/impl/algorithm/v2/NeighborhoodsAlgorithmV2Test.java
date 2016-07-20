@@ -6,6 +6,7 @@ import com.id.droneapi.helper.TestCase;
 import com.id.droneapi.helper.TestCaseBuilder;
 import com.id.droneapi.helper.TestHelper;
 import junit.framework.Assert;
+import org.junit.Test;
 
 /**
  *
@@ -13,9 +14,9 @@ import junit.framework.Assert;
  */
 public class NeighborhoodsAlgorithmV2Test {
 
-    private static INeighborhoodsAlgorithm algorithm;
-    private static TestHelper helper;
-    private static TestCaseBuilder testBuilder;
+    private final INeighborhoodsAlgorithm algorithm;
+    private final TestHelper helper;
+    private final TestCaseBuilder testBuilder;
 
     public NeighborhoodsAlgorithmV2Test() {
         testBuilder = new TestCaseBuilder();
@@ -30,6 +31,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_1() throws Exception {
         TestCase test = testBuilder.testCase1();
         executeTest(test);
@@ -38,6 +40,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_2() throws Exception {
         TestCase test = testBuilder.testCase2();
         executeTest(test);
@@ -46,6 +49,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_3() throws Exception {
         TestCase test = testBuilder.testCase3();
         executeTest(test);
@@ -54,6 +58,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_4() throws Exception {
         TestCase test = testBuilder.testCase4();
         executeTest(test);
@@ -62,6 +67,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_5() throws Exception {
         TestCase test = testBuilder.testCase5();
         executeTest(test);
@@ -70,6 +76,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_6() throws Exception {
         TestCase test = testBuilder.testCase6();
         executeTest(test);
@@ -78,6 +85,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_7() throws Exception {
         TestCase test = testBuilder.testCase7();
         executeTest(test);
@@ -86,6 +94,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_8() throws Exception {
         TestCase test = testBuilder.testCase8();
         executeTest(test);
@@ -94,6 +103,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_9() throws Exception {
         TestCase test = testBuilder.testCase9();
         executeTest(test);
@@ -102,6 +112,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_10() throws Exception {
         TestCase test = testBuilder.testCase10();
         executeTest(test);
@@ -110,6 +121,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_11() throws Exception {
         TestCase test = testBuilder.testCase11();
         executeTest(test);
@@ -118,6 +130,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_12() throws Exception {
         TestCase test = testBuilder.testCase12();
         executeTest(test);
@@ -127,6 +140,7 @@ public class NeighborhoodsAlgorithmV2Test {
      * @throws java.lang.Exception
      */
     //(expected = NeighborhoodsAlgorithmEx.class)
+    @Test
     public void testNeighborhoodsV2_13() throws Exception {
         boolean exception = false;
         try {
@@ -142,6 +156,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_14() throws Exception {
         TestCase test = testBuilder.testCase14();
         executeTest(test);
@@ -150,6 +165,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_15() throws Exception {
         TestCase test = testBuilder.testCase15();
         executeTest(test);
@@ -158,6 +174,7 @@ public class NeighborhoodsAlgorithmV2Test {
     /**
      * @throws java.lang.Exception
      */
+    @Test
     public void testNeighborhoodsV2_16() throws Exception {
         TestCase test = testBuilder.testCase16();
         executeTest(test);

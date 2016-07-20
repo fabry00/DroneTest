@@ -14,7 +14,7 @@ import java.util.Map.Entry;
  *
  * @author Fabrizio Faustinoni
  */
-public class Clockwise implements IScanDirectionV1 {
+public class ClockWise implements IScanDirectionV1 {
 
     private static final List<NodeType> VERTICES = new ArrayList<Neighborhoods.NodeType>() {
         {

@@ -125,7 +125,7 @@ public class Neighborhoods {
     /**
      * Algorithm to retrieve the Neighborhoods parent vertices
      *
-     * @return The  Neighborhoods parent vertices map 
+     * @return The Neighborhoods parent vertices map
      * @throws NeighborhoodsAlgorithmEx the exception
      */
     private Map<NodeType, Node> retreiveParentVertices(IDealistaAPI api) throws NeighborhoodsAlgorithmEx {
@@ -251,13 +251,13 @@ public class Neighborhoods {
             Map<NodeType, Node> parentCardianlNodes) {
 
         int max = scandDirection.getVertexOrdered().size();
-        currentIndex
-                = scandDirection.incrementIndex(currentIndex, max);
+       
+        currentIndex = (currentIndex >= max - 1) ? 0 : currentIndex + 1;
 
         NodeType nextCardinalLimit = scandDirection.getVertexOrdered().get(currentIndex);
-        Node newLimitNode = parentCardianlNodes.get(nextCardinalLimit);
-        logger.log(Level.INFO, "New Node limit {0}", newLimitNode);
-        return newLimitNode;
+        Node newVertexNode = parentCardianlNodes.get(nextCardinalLimit);
+        logger.log(Level.INFO, "New Node limit {0}", newVertexNode);
+        return newVertexNode;
     }
 
 }
