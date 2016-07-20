@@ -14,6 +14,8 @@ import org.junit.Test;
  */
 public class NeighborhoodsAlgorithmV2Test {
 
+    private static final String NAME_TEST = NeighborhoodsAlgorithmV2.class.getSimpleName();
+
     private final INeighborhoodsAlgorithm algorithm;
     private final TestHelper helper;
     private final TestCaseBuilder testBuilder;
@@ -21,11 +23,14 @@ public class NeighborhoodsAlgorithmV2Test {
     public NeighborhoodsAlgorithmV2Test() {
         testBuilder = new TestCaseBuilder();
         helper = new TestHelper();
+
         algorithm = new NeighborhoodsAlgorithmV2();
+
+        helper.initTesting(NAME_TEST);
     }
 
     private void executeTest(TestCase test) throws Exception {
-        helper.executeTest(test, algorithm);
+        helper.executeTest(test, algorithm, NAME_TEST);
     }
 
     /**

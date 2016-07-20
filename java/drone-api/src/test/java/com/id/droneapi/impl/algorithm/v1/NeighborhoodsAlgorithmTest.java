@@ -6,7 +6,7 @@ import com.id.droneapi.helper.TestCase;
 import com.id.droneapi.helper.TestCaseBuilder;
 import com.id.droneapi.helper.TestHelper;
 import com.id.droneapi.impl.algorithm.v1.scandirection.ClockWise;
-import junit.framework.Assert;
+import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
 
 /**
@@ -15,17 +15,20 @@ import org.junit.Test;
  */
 public class NeighborhoodsAlgorithmTest {
 
+    private static final String NAME_TEST = NeighborhoodsAlgorithmV1.class.getSimpleName();
     private final TestHelper helper;
     private final TestCaseBuilder testBuilder;
 
     public NeighborhoodsAlgorithmTest() {
         testBuilder = new TestCaseBuilder();
         helper = new TestHelper();
+        helper.initTesting(NAME_TEST);
     }
 
     private void executeTest(TestCase test, IScanDirection direction) throws Exception {
 
-        helper.executeTest(test, new NeighborhoodsAlgorithm(direction));
+        helper.executeTest(test, new NeighborhoodsAlgorithmV1(direction),
+                NAME_TEST);
     }
 
     @Test
@@ -123,7 +126,7 @@ public class NeighborhoodsAlgorithmTest {
             exception = true;
         }
 
-        Assert.assertTrue(exception);
+        assertTrue(exception);
     }
 
     @Test

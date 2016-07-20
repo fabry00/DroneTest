@@ -14,26 +14,28 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * WARNING!!!!!!!!!
- * The CounterClockWise has been planned but not completed yet!!
- * This is just an example to how to use the dependency injection 
- * 
+ * WARNING!!!!!!!!! The CounterClockWise has been planned but not completed
+ * yet!! This is just an example to how to use the dependency injection
+ *
  * @author Fabrizio Faustinoni
  */
 public class NeighborhoodsAlgorithmReverseTest {
 
+    private static final String NAME_TEST = NeighborhoodsAlgorithmV1.class.getSimpleName()+" (CounterClockWise)";
     private final TestHelper helper;
     private final TestCaseBuilder testBuilder;
 
     public NeighborhoodsAlgorithmReverseTest() {
         testBuilder = new TestCaseBuilder();
         helper = new TestHelper();
+        helper.initTesting( NAME_TEST);
     }
 
     private void executeTest(TestCase test, IScanDirection direction) throws Exception {
 
-        helper.executeTest(test, new NeighborhoodsAlgorithm(direction));
+        helper.executeTest(test, new NeighborhoodsAlgorithmV1(direction), NAME_TEST);
     }
+    
 
     private List<IUrbanizationID> reverse(List<IUrbanizationID> expected) {
         if (!expected.isEmpty()) {

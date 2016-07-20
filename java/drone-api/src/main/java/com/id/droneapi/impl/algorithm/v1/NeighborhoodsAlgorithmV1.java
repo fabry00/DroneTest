@@ -12,11 +12,11 @@ import com.id.droneapi.impl.algorithm.v1.scandirection.IScanDirectionV1;
 import com.id.droneapi.mock.exception.NodeNotFound;
 import java.util.logging.Level;
 
-public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
+public class NeighborhoodsAlgorithmV1 implements INeighborhoodsAlgorithm {
 
     private static IScanDirection SCAN_DIRECTION = new ClockWise();
 
-    private static final Logger logger = Logger.getLogger(NeighborhoodsAlgorithm.class.getName());
+    private static final Logger logger = Logger.getLogger(NeighborhoodsAlgorithmV1.class.getName());
     private IDealistaAPI api;
     private IScanDirection scanDirection = SCAN_DIRECTION;
 
@@ -24,7 +24,7 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
      * Constructor
      * @param scanDirection the scan direction implemetnation
      */
-    public NeighborhoodsAlgorithm(IScanDirection scanDirection) {
+    public NeighborhoodsAlgorithmV1(IScanDirection scanDirection) {
         if (scanDirection != null) {
             this.scanDirection = scanDirection;
         }
