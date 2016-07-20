@@ -14,17 +14,16 @@ import drone.mock.UrbanizationMatrix;
  * @author Fabrizio Faustinoni
  */
 public class TestHelper {
-    
-    
-    public IDealistaAPI getIdealistaAPI(int col,int row) throws NodeAlreadyAddedAsAdjacent, DuplicatedAdjacentNode, NodeAlreadyAdded, NodeNotFound {
-        IDealistaAPI idApi = createUBMatrix(row,col);
+
+    public IDealistaAPI getIdealistaAPI(int col, int row) throws NodeAlreadyAddedAsAdjacent, DuplicatedAdjacentNode, NodeAlreadyAdded, NodeNotFound {
+        IDealistaAPI idApi = createUBMatrix(row, col);
         return idApi;
     }
-    
+
     /**
      * @param row
      * @param col
-     * @return 
+     * @return
      * @throws drone.mock.exception.NodeAlreadyAddedAsAdjacent
      * @throws drone.mock.exception.DuplicatedAdjacentNode
      * @throws drone.mock.exception.NodeAlreadyAdded
@@ -52,5 +51,15 @@ public class TestHelper {
 
     public UrbanizationID getId(int id) {
         return new UrbanizationID((id < 10) ? "0" + id : id + "");
+    }
+
+    public String testToString(IDealistaAPI api, TestCase test) {
+
+        String string = "Test " + test.id + "\n";
+        string += "InputNode (" + test.starting_node_x + "," + test.starting_node_y + ") range: " + test.range + "\n";
+        string += api + "\n";
+
+        return string;
+
     }
 }
