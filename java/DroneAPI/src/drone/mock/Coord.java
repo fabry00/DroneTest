@@ -3,8 +3,8 @@ package drone.mock;
 import java.util.Objects;
 
 /**
- * Representa a Coordinate of a Node
- * @author exfaff
+ * Represents a Coordinate of a Node
+ * @author Fabrizio Faustinoni
  */
 public class Coord {
 

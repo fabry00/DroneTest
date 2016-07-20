@@ -8,7 +8,7 @@ import drone.mock.API.DirectionID;
 import drone.mock.exception.DirectionNotFound;
 
 /**
- * Create the righ instance associated to the right Direction id
+ * Create the right instance associated to the right Direction id
  *
  * @author Fabrizio Faustinoni
  */

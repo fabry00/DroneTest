@@ -199,10 +199,10 @@ public class Neighborhoods {
                                     + "new CurrentNode:{0}", currentNode);
                             continue;
                         }
-                        logger.log(Level.INFO, "Adding node {0} as neighbor", adjacentId);
-
+                        
                         Node nodeToAdd = new Node(adjacentId);
                         if (!parentNodes.contains(adjacentId)) {
+                            logger.log(Level.INFO, "Adding node {0} as neighbor", adjacentId);
                             neighborhoodNodes.add(nodeToAdd);
                         }
                         currentNode = nodeToAdd;

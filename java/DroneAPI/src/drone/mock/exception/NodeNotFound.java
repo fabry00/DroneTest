@@ -2,7 +2,7 @@ package drone.mock.exception;
 
 /**
  * Fired if the node required is not found
- * @author exfaff
+ * @author Fabrizio Faustinoni
  */
 public class NodeNotFound extends Exception{
     
