@@ -1,5 +1,6 @@
 package drone.API.impl.algorithm.v1;
 
+import drone.API.impl.algorithm.v1.scandirection.ScanDirection;
 import java.util.List;
 import java.util.logging.Logger;
 import drone.mock.API.IDealistaAPI;

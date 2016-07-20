@@ -1,6 +1,6 @@
 package drone.API.impl.algorithm.v1;
 
-import java.util.AbstractMap;
+import drone.API.impl.algorithm.v1.scandirection.ScanDirection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,14 +31,6 @@ public class Neighborhoods {
         NORTHERN_WEST, SOUTHERN_WEST, SOUTHERN_EST, NORTHERN_EST
     };
     private final Map<NodeType, Node> vertices = new HashMap<>();
-    private final List<NodeType> clockWiseVertices = new ArrayList<NodeType>() {
-        {
-            add(NodeType.NORTHERN_WEST);
-            add(NodeType.NORTHERN_EST);
-            add(NodeType.SOUTHERN_EST);
-            add(NodeType.SOUTHERN_WEST);
-        }
-    };
 
     private final IUrbanizationID centralNode;
 
@@ -125,7 +117,7 @@ public class Neighborhoods {
 
         List<Node> nodes = getNeighborhoodNodes(parentNeighborhoods.getNodesIDs(),
                 api, scandDirection, vertices);
-        
+
         this.neighborNodes = Collections.unmodifiableList(nodes);
     }
 
@@ -172,7 +164,7 @@ public class Neighborhoods {
             // No solution
             return neighborhoodNodes;
         }
-        
+
         Node currentNode = initials.getKey();
         DirectionID currentDir = initials.getValue();
         neighborhoodNodes.add(currentNode);
@@ -219,7 +211,7 @@ public class Neighborhoods {
                 } catch (NoAdjacentNode ex) {
                     break;
                 } catch (NodeNotFound | DirectionNotFound ex) {
-                    throw new NeighborhoodsAlgorithmEx("Oops! Something went wrong ",ex);
+                    throw new NeighborhoodsAlgorithmEx("Oops! Something went wrong ", ex);
                 }
 
             }
@@ -236,28 +228,10 @@ public class Neighborhoods {
     }
 
     private Entry<Node, DirectionID> getStartingNode(ScanDirection scandDirection,
-            Map<NodeType, Node> parentCardianlNodes) {
+            Map<NodeType, Node> parentVerticesNodes) {
 
-        if (scandDirection.equals(ScanDirection.CLOCKWISE)) {
-            DirectionID currentDirection = DirectionID.RIGHT;
-            for (NodeType nodeType : clockWiseVertices) {
-                if (parentCardianlNodes.get(nodeType) != null) {
-                    return new AbstractMap.SimpleEntry(parentCardianlNodes.get(nodeType), currentDirection);
-                }
-                currentDirection = scandDirection.getNext(currentDirection);
-            }
-        } else {
-            // FIXME TO UPDATE
-            DirectionID currentDirection = DirectionID.DOWN;
-            for (int i = clockWiseVertices.size() - 1; i >= 0; i--) {
-                if (parentCardianlNodes.get(clockWiseVertices.get(i)) != null) {
-                    return new AbstractMap.SimpleEntry(parentCardianlNodes.get(clockWiseVertices.get(i)), currentDirection);
-                }
-                currentDirection = scandDirection.getNext(currentDirection);
-            }
-        }
+        return scandDirection.getStartingNode(parentVerticesNodes);
 
-        return null;
     }
 
     private int getStartIndex(DirectionID currentDir, ScanDirection scandDirection) {
@@ -275,15 +249,11 @@ public class Neighborhoods {
     private Node getNextVertex(int currentIndex, ScanDirection scandDirection,
             Map<NodeType, Node> parentCardianlNodes) {
 
-        if (scandDirection.equals(ScanDirection.CLOCKWISE)) {
-            currentIndex = (currentIndex >= clockWiseVertices.size() - 1)
-                    ? 0 : currentIndex + 1;
+        int max = scandDirection.getVertexOrdered().size();
+        currentIndex
+                = scandDirection.incrementIndex(currentIndex, max);
 
-        } else {
-            currentIndex = (currentIndex == 0)
-                    ? clockWiseVertices.size() - 1 : currentIndex - 1;
-        }
-        NodeType nextCardinalLimit = clockWiseVertices.get(currentIndex);
+        NodeType nextCardinalLimit = scandDirection.getVertexOrdered().get(currentIndex);
         Node newLimitNode = parentCardianlNodes.get(nextCardinalLimit);
         logger.log(Level.INFO, "New Node limit {0}", newLimitNode);
         return newLimitNode;
