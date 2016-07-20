@@ -1,6 +1,6 @@
 package drone.API.impl.algorithm.v1;
 
-import java.util.AbstractMap;
+import drone.API.IScanDirection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +13,7 @@ import drone.mock.API.IDealistaAPI;
 import drone.mock.API.IUrbanizationID;
 import drone.mock.exception.DirectionNotFound;
 import drone.API.exception.NeighborhoodsAlgorithmEx;
+import drone.API.impl.algorithm.v1.scandirection.IScanDirectionV1;
 import drone.API.impl.algorithm.v1.vertex.BottomLeft;
 import drone.API.impl.algorithm.v1.vertex.BottomRight;
 import drone.API.impl.algorithm.v1.vertex.IVertex;
@@ -31,24 +32,13 @@ public class Neighborhoods {
         NORTHERN_WEST, SOUTHERN_WEST, SOUTHERN_EST, NORTHERN_EST
     };
     private final Map<NodeType, Node> vertices = new HashMap<>();
-    private final List<NodeType> clockWiseOrdered = new ArrayList<NodeType>() {
-        {
-            add(NodeType.NORTHERN_WEST);
-            add(NodeType.NORTHERN_EST);
-            add(NodeType.SOUTHERN_EST);
-            add(NodeType.SOUTHERN_WEST);
-        }
-    };
 
     private final IUrbanizationID centralNode;
 
     private List<Node> neighborNodes = new ArrayList<>();
 
-    public Neighborhoods(Node northern_west,
-            Node northern_est,
-            Node southern_west,
-            Node southern_est,
-            IUrbanizationID centraltNode) {
+    public Neighborhoods(Node northern_west, Node northern_est, Node southern_west,
+            Node southern_est, IUrbanizationID centraltNode) {
 
         this.centralNode = centraltNode;
         vertices.put(NodeType.NORTHERN_WEST, northern_west);
@@ -104,7 +94,7 @@ public class Neighborhoods {
      * @throws NeighborhoodsAlgorithmEx
      */
     public Neighborhoods calculateParentVertices(IDealistaAPI api,
-            ScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
+            IScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
 
         Map<NodeType, Node> verticesTmp = retreiveParentVertices(api);
 
@@ -124,14 +114,16 @@ public class Neighborhoods {
      * @throws NeighborhoodsAlgorithmEx
      */
     public void calculateNeighborhoodsNodes(Neighborhoods parentNeighborhoods,
-            IDealistaAPI api, ScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
+            IDealistaAPI api, IScanDirectionV1 scandDirection) throws NeighborhoodsAlgorithmEx {
 
-        List<Node> nodes = getNeighborhoodNodes(parentNeighborhoods.getNodesIDs(), api, scandDirection, vertices);
+        List<Node> nodes = getNeighborhoodNodes(parentNeighborhoods.getNodesIDs(),
+                api, scandDirection, vertices);
+
         this.neighborNodes = Collections.unmodifiableList(nodes);
     }
 
     /**
-     * Algorithm to retreive the Neighborhoods parent vertices
+     * Algorithm to retrieve the Neighborhoods parent vertices
      *
      * @return
      * @throws NeighborhoodsAlgorithmEx
@@ -163,7 +155,7 @@ public class Neighborhoods {
     }
 
     private List<Node> getNeighborhoodNodes(List<IUrbanizationID> parentNodes,
-            IDealistaAPI api, ScanDirection scandDirection, Map<NodeType, Node> vertices)
+            IDealistaAPI api, IScanDirectionV1 scandDirection, Map<NodeType, Node> vertices)
             throws NeighborhoodsAlgorithmEx {
 
         List<Node> neighborhoodNodes = new ArrayList<>();
@@ -173,33 +165,34 @@ public class Neighborhoods {
             // No solution
             return neighborhoodNodes;
         }
+
         Node currentNode = initials.getKey();
         DirectionID currentDir = initials.getValue();
         neighborhoodNodes.add(currentNode);
         int startIndex = getStartIndex(currentDir, scandDirection);
-        Node limitNode = getLimitNode(startIndex, scandDirection, vertices);
+        Node currentVertex = getNextVertex(startIndex, scandDirection, vertices);
 
         logger.log(Level.INFO, "StartNode: {0} direction:{1} limitNode: {2} "
                 + "startIndex: {3}", new Object[]{currentNode, currentDir,
-                    limitNode, startIndex});
+                    currentVertex, startIndex});
 
-        for (int i = startIndex; i < scandDirection.getSizeSequence(); i++) {
+        for (int i = startIndex; i < scandDirection.getVertexOrdered().size(); i++) {
             while (true) {
                 if (currentNode == null) {
                     break;
                 }
                 try {
                     IUrbanizationID adjacentId;
-                    if (limitNode == null || !limitNode.getId().equals(currentNode.getId())) {
+                    if (currentVertex == null || !currentVertex.getId().equals(currentNode.getId())) {
                         adjacentId = api.getAdjacent(currentNode.getId(), currentDir);
                         if (adjacentId.equals(centralNode)) {
-                            // Reached limit
+                            // Limit Reached
                             currentNode = new Node(centralNode);
                             logger.log(Level.INFO, "Passing for centralNode, skip it. "
                                     + "new CurrentNode:{0}", currentNode);
                             continue;
                         }
-                        
+
                         Node nodeToAdd = new Node(adjacentId);
                         if (!parentNodes.contains(adjacentId)) {
                             logger.log(Level.INFO, "Adding node {0} as neighbor", adjacentId);
@@ -211,7 +204,7 @@ public class Neighborhoods {
                         adjacentId = currentNode.getId();
                     }
 
-                    if (limitNode != null && limitNode.getId().equals(adjacentId)) {
+                    if (currentVertex != null && currentVertex.getId().equals(adjacentId)) {
                         // Reached limit
                         break;
                     }
@@ -219,15 +212,15 @@ public class Neighborhoods {
                 } catch (NoAdjacentNode ex) {
                     break;
                 } catch (NodeNotFound | DirectionNotFound ex) {
-                    throw new NeighborhoodsAlgorithmEx("Oops! Something went wrong");
+                    throw new NeighborhoodsAlgorithmEx("Oops! Something went wrong ", ex);
                 }
 
             }
 
             currentDir = scandDirection.getNext(currentDir);
-            limitNode = getLimitNode(i + 1, scandDirection, vertices);
+            currentVertex = getNextVertex(i + 1, scandDirection, vertices);
         }
-        // Start node inserted two time, remove the last
+        // Start node inserted two times, remove the last
         if (neighborhoodNodes.get(0).equals(neighborhoodNodes.get(neighborhoodNodes.size() - 1))) {
             neighborhoodNodes.remove(neighborhoodNodes.size() - 1);
         }
@@ -235,34 +228,16 @@ public class Neighborhoods {
         return neighborhoodNodes;
     }
 
-    private Entry<Node, DirectionID> getStartingNode(ScanDirection scandDirection,
-            Map<NodeType, Node> parentCardianlNodes) {
+    private Entry<Node, DirectionID> getStartingNode(IScanDirectionV1 scandDirection,
+            Map<NodeType, Node> parentVerticesNodes) {
 
-        if (scandDirection.equals(ScanDirection.CLOCKWISE)) {
-            DirectionID currentDirection = DirectionID.RIGHT;
-            for (NodeType nodeType : clockWiseOrdered) {
-                if (parentCardianlNodes.get(nodeType) != null) {
-                    return new AbstractMap.SimpleEntry(parentCardianlNodes.get(nodeType), currentDirection);
-                }
-                currentDirection = scandDirection.getNext(currentDirection);
-            }
-        } else {
-            // FIXME TO UPDATE
-            DirectionID currentDirection = DirectionID.DOWN;
-            for (int i = clockWiseOrdered.size() - 1; i >= 0; i--) {
-                if (parentCardianlNodes.get(clockWiseOrdered.get(i)) != null) {
-                    return new AbstractMap.SimpleEntry(parentCardianlNodes.get(clockWiseOrdered.get(i)), currentDirection);
-                }
-                currentDirection = scandDirection.getNext(currentDirection);
-            }
-        }
+        return scandDirection.getStartingNode(parentVerticesNodes);
 
-        return null;
     }
 
-    private int getStartIndex(DirectionID currentDir, ScanDirection scandDirection) {
+    private int getStartIndex(DirectionID currentDir, IScanDirectionV1 scandDirection) {
         int i = 0;
-        for (DirectionID dir : scandDirection.getList()) {
+        for (DirectionID dir : scandDirection.getOrderedDir()) {
             if (dir.equals(currentDir)) {
                 return i;
             }
@@ -272,18 +247,14 @@ public class Neighborhoods {
         return i;
     }
 
-    private Node getLimitNode(int currentIndex, ScanDirection scandDirection,
+    private Node getNextVertex(int currentIndex, IScanDirectionV1 scandDirection,
             Map<NodeType, Node> parentCardianlNodes) {
 
-        if (scandDirection.equals(ScanDirection.CLOCKWISE)) {
-            currentIndex = (currentIndex >= clockWiseOrdered.size() - 1)
-                    ? 0 : currentIndex + 1;
+        int max = scandDirection.getVertexOrdered().size();
+        currentIndex
+                = scandDirection.incrementIndex(currentIndex, max);
 
-        } else {
-            currentIndex = (currentIndex == 0)
-                    ? clockWiseOrdered.size() - 1 : currentIndex - 1;
-        }
-        NodeType nextCardinalLimit = clockWiseOrdered.get(currentIndex);
+        NodeType nextCardinalLimit = scandDirection.getVertexOrdered().get(currentIndex);
         Node newLimitNode = parentCardianlNodes.get(nextCardinalLimit);
         logger.log(Level.INFO, "New Node limit {0}", newLimitNode);
         return newLimitNode;

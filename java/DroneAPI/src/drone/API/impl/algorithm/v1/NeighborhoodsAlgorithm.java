@@ -4,17 +4,26 @@ import java.util.List;
 import java.util.logging.Logger;
 import drone.mock.API.IDealistaAPI;
 import drone.API.INeighborhoodsAlgorithm;
+import drone.API.IScanDirection;
 import drone.mock.API.IUrbanizationID;
 import drone.API.exception.NeighborhoodsAlgorithmEx;
+import drone.API.impl.algorithm.v1.scandirection.Clockwise;
+import drone.API.impl.algorithm.v1.scandirection.IScanDirectionV1;
 import drone.mock.exception.NodeNotFound;
 import java.util.logging.Level;
 
 public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
 
-    private static final ScanDirection SCAN_DIRECTION = ScanDirection.CLOCKWISE;
+    private static final IScanDirection DEFAULT_SCAN_DIRECTION = new Clockwise();
 
     private static final Logger logger = Logger.getLogger(NeighborhoodsAlgorithm.class.getName());
     private IDealistaAPI api;
+    private IScanDirection scandDirection = DEFAULT_SCAN_DIRECTION;
+    
+    @Override
+    public void setScandDirection(IScanDirection direction) {
+        this.scandDirection  = direction;
+    }
 
     @Override
     public List<IUrbanizationID> getNeighborhoods(double x, double y, int range,
@@ -67,9 +76,10 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
         // Calculating the Neighborhoods until we reach the desired range
         while (currentRange <= range) {
             // Calcuate the new Neighborhoods Vertex
-            Neighborhoods newNeighborhoods = lastNeighborhoods.calculateParentVertices(api, SCAN_DIRECTION);
+            Neighborhoods newNeighborhoods = lastNeighborhoods.calculateParentVertices(api, scandDirection);
             // Calculate the NeighborhoodsNodes
-            newNeighborhoods.calculateNeighborhoodsNodes(lastNeighborhoods, api, SCAN_DIRECTION);
+            newNeighborhoods.calculateNeighborhoodsNodes(lastNeighborhoods, api, 
+                    (IScanDirectionV1)scandDirection);
             
             lastNeighborhoods = newNeighborhoods;
             currentRange++;
@@ -93,4 +103,6 @@ public class NeighborhoodsAlgorithm implements INeighborhoodsAlgorithm {
                 new Node(startingNode),
                 startingNode);
     }
+
+    
 }

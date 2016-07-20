@@ -147,66 +147,12 @@ public class NeighborhoodsAlgorithmTest {
         executeTest(test);
     }
 
-    //@Test
     /**
-     * InputNode (0,0) range: 1 01(0.0,0.0) 02(1.0,0.0) 03(2.0,0.0)
+     * @throws java.lang.Exception
      */
-    /*public void testNeighborhoodsV1_14() throws Exception {
-     // Input node coords
-     int x = 0;
-     int y = 0;
-     int range = 1;
-     // urbanizationMatrix dimensions
-     int width = 3;
-     int height = 1;
-        
-        
-     List<IUrbanizationID> expected = new ArrayList<IUrbanizationID>(){
-     {
-     add(helper.getId(2));
-     }
-     };
-
-     IDealistaAPI api = helper.getIdealistaAPI(width, height);
-     ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
-
-     System.out.println("Test 14");
-     System.out.println("InputNode ("+x+","+y+") range: "+range);
-     // Print the matrix
-     System.out.println(api);
-        
-     List<IUrbanizationID> actual = testDrone.getNeighborhoods(x, y, range);
-     assertEquals(expected, actual);
-     }*/
-    //@Test
-    /**
-     * InputNode (0,0) range: 1 01(0.0,0.0) 02(0.0,1.0) 03(0.0,2.0)
-     */
-    /*public void testNeighborhoodsV1_15() throws Exception {
-     // Input node coords
-     int x = 0;
-     int y = 0;
-     int range = 1;
-     // urbanizationMatrix dimensions
-     int width = 1;
-     int height = 3;
-        
-        
-     List<IUrbanizationID> expected = new ArrayList<IUrbanizationID>(){
-     {
-     add(helper.getId(2));
-     }
-     };
-
-     IDealistaAPI api = helper.getIdealistaAPI(width, height);
-     ITestDroneAPI testDrone = new TestDroneAPI(api, algorithm);
-
-     System.out.println("Test 14");
-     System.out.println("InputNode ("+x+","+y+") range: "+range);
-     // Print the matrix
-     System.out.println(api);
-        
-     List<IUrbanizationID> actual = testDrone.getNeighborhoods(x, y, range);
-     assertEquals(expected, actual);
-     }*/
+    /*@Test NOT YET SUPPORTED
+    public void testNeighborhoodsV1_16() throws Exception {
+        TestCase test = testBuilder.testCase16();
+        executeTest(test);
+    }*/
 }
