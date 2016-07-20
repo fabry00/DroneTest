@@ -1,6 +1,5 @@
 package drone.API.impl.v2;
 
-import drone.API.impl.v1.*;
 import drone.API.impl.algorithm.v1.NeighborhoodsAlgorithm;
 import java.util.ArrayList;
 import java.util.List;

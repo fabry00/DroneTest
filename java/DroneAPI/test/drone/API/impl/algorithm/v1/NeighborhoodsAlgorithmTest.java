@@ -1,7 +1,6 @@
-package drone.API.impl.v1;
+package drone.API.impl.algorithm.v1;
 
 import drone.API.impl.algorithm.v1.NeighborhoodsAlgorithm;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -58,14 +57,7 @@ public class NeighborhoodsAlgorithmTest {
     }
 
     private void executeTest(TestCase test) throws Exception {
-        IDealistaAPI api = helper.getIdealistaAPI(test.ub_matrix_width, test.ub_matrix_height);
-        IDroneAPI testDrone = new DroneAPI(api, algorithm);
-
-        System.out.println(helper.testToString(api, test));
-
-        List<IUrbanizationID> actual
-                = testDrone.getNeighborhoods(test.starting_node_x, test.starting_node_y, test.range);
-        assertEquals(test.expected, actual);
+        helper.executeTest(test, algorithm);
     }
 
     @Test

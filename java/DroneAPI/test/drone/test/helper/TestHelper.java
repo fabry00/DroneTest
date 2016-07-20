@@ -1,6 +1,10 @@
 package drone.test.helper;
 
+import drone.API.IDroneAPI;
+import drone.API.INeighborhoodsAlgorithm;
+import drone.API.impl.DroneAPI;
 import drone.mock.API.IDealistaAPI;
+import drone.mock.API.IUrbanizationID;
 import drone.mock.exception.DuplicatedAdjacentNode;
 import drone.mock.exception.NodeAlreadyAdded;
 import drone.mock.exception.NodeAlreadyAddedAsAdjacent;
@@ -8,6 +12,8 @@ import drone.mock.exception.NodeNotFound;
 import drone.mock.Node;
 import drone.mock.UrbanizationID;
 import drone.mock.UrbanizationMatrix;
+import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -61,5 +67,16 @@ public class TestHelper {
 
         return string;
 
+    }
+    
+    public void executeTest(TestCase test, INeighborhoodsAlgorithm algorithm) throws Exception {
+        IDealistaAPI api = getIdealistaAPI(test.ub_matrix_width, test.ub_matrix_height);
+        IDroneAPI testDrone = new DroneAPI(api, algorithm);
+
+        System.out.println(testToString(api, test));
+
+        List<IUrbanizationID> actual
+                = testDrone.getNeighborhoods(test.starting_node_x, test.starting_node_y, test.range);
+        assertEquals(test.expected, actual);
     }
 }
