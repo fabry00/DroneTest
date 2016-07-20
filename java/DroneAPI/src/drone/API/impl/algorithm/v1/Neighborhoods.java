@@ -1,6 +1,6 @@
 package drone.API.impl.algorithm.v1;
 
-import drone.API.impl.algorithm.v1.scandirection.ScanDirection;
+import drone.API.IScanDirection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +13,7 @@ import drone.mock.API.IDealistaAPI;
 import drone.mock.API.IUrbanizationID;
 import drone.mock.exception.DirectionNotFound;
 import drone.API.exception.NeighborhoodsAlgorithmEx;
+import drone.API.impl.algorithm.v1.scandirection.IScanDirectionV1;
 import drone.API.impl.algorithm.v1.vertex.BottomLeft;
 import drone.API.impl.algorithm.v1.vertex.BottomRight;
 import drone.API.impl.algorithm.v1.vertex.IVertex;
@@ -93,7 +94,7 @@ public class Neighborhoods {
      * @throws NeighborhoodsAlgorithmEx
      */
     public Neighborhoods calculateParentVertices(IDealistaAPI api,
-            ScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
+            IScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
 
         Map<NodeType, Node> verticesTmp = retreiveParentVertices(api);
 
@@ -113,7 +114,7 @@ public class Neighborhoods {
      * @throws NeighborhoodsAlgorithmEx
      */
     public void calculateNeighborhoodsNodes(Neighborhoods parentNeighborhoods,
-            IDealistaAPI api, ScanDirection scandDirection) throws NeighborhoodsAlgorithmEx {
+            IDealistaAPI api, IScanDirectionV1 scandDirection) throws NeighborhoodsAlgorithmEx {
 
         List<Node> nodes = getNeighborhoodNodes(parentNeighborhoods.getNodesIDs(),
                 api, scandDirection, vertices);
@@ -154,7 +155,7 @@ public class Neighborhoods {
     }
 
     private List<Node> getNeighborhoodNodes(List<IUrbanizationID> parentNodes,
-            IDealistaAPI api, ScanDirection scandDirection, Map<NodeType, Node> vertices)
+            IDealistaAPI api, IScanDirectionV1 scandDirection, Map<NodeType, Node> vertices)
             throws NeighborhoodsAlgorithmEx {
 
         List<Node> neighborhoodNodes = new ArrayList<>();
@@ -175,7 +176,7 @@ public class Neighborhoods {
                 + "startIndex: {3}", new Object[]{currentNode, currentDir,
                     currentVertex, startIndex});
 
-        for (int i = startIndex; i < scandDirection.getSizeSequence(); i++) {
+        for (int i = startIndex; i < scandDirection.getVertexOrdered().size(); i++) {
             while (true) {
                 if (currentNode == null) {
                     break;
@@ -227,16 +228,16 @@ public class Neighborhoods {
         return neighborhoodNodes;
     }
 
-    private Entry<Node, DirectionID> getStartingNode(ScanDirection scandDirection,
+    private Entry<Node, DirectionID> getStartingNode(IScanDirectionV1 scandDirection,
             Map<NodeType, Node> parentVerticesNodes) {
 
         return scandDirection.getStartingNode(parentVerticesNodes);
 
     }
 
-    private int getStartIndex(DirectionID currentDir, ScanDirection scandDirection) {
+    private int getStartIndex(DirectionID currentDir, IScanDirectionV1 scandDirection) {
         int i = 0;
-        for (DirectionID dir : scandDirection.getList()) {
+        for (DirectionID dir : scandDirection.getOrderedDir()) {
             if (dir.equals(currentDir)) {
                 return i;
             }
@@ -246,7 +247,7 @@ public class Neighborhoods {
         return i;
     }
 
-    private Node getNextVertex(int currentIndex, ScanDirection scandDirection,
+    private Node getNextVertex(int currentIndex, IScanDirectionV1 scandDirection,
             Map<NodeType, Node> parentCardianlNodes) {
 
         int max = scandDirection.getVertexOrdered().size();

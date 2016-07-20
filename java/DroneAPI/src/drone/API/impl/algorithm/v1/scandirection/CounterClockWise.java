@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author Fabrizio Fausitnoni
  */
-public class CounterClockWise implements IScanDirection {
+public class CounterClockWise implements IScanDirectionV1 {
 
     private static final List<NodeType> VERTICES = new ArrayList<Neighborhoods.NodeType>() {
         {
