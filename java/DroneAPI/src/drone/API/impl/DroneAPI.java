@@ -13,6 +13,7 @@ import drone.mock.exception.DirectionNotFound;
 import drone.API.exception.NeighborhoodsAlgorithmEx;
 import drone.mock.exception.NoAdjacentNode;
 import drone.mock.exception.NodeNotFound;
+import java.util.Collections;
 
 /**
  * Drone API implementation
@@ -36,13 +37,14 @@ public class DroneAPI implements IDroneAPI {
 
     @Override
     public List<IUrbanizationID> getNeighborhoods(double x, double y, int range) {
+        List<IUrbanizationID> nodes = new ArrayList<>();
         try {
-            return this.algorithm.getNeighborhoods(x, y, range, api);
+            nodes.addAll(this.algorithm.getNeighborhoods(x, y, range, api));
         } catch (NeighborhoodsAlgorithmEx ex) {
             Logger.getLogger(DroneAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return new ArrayList<>();
+        return Collections.unmodifiableList(nodes);
     }
 
     @Override
