@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ServiceInfo.html" title="com.mycompany.service.api.ServiceInfo" alt="" coords="17,118,99,143"/>
+<area shape="rect" id="node1" href="./ServiceInfo.html" title="&lt;TABLE&gt;" alt="" coords="7,107,109,155"/>
+<area shape="rect" id="node2_1" href="./ServiceInfo.Builder.html" title="com.mycompany.service.api.ServiceInfo.Builder" alt="" coords="145,19,205,45"/>
+<area shape="rect" id="node2" href="./ServiceInfo.Builder.html" title="&lt;TABLE&gt;" alt="" coords="135,8,216,56"/>
+<area shape="rect" id="node3_2" href="./IServiceInfo.html" title="com.mycompany.service.api.IServiceInfo" alt="" coords="16,11,100,53"/>
+<area shape="rect" id="node3" href="./IServiceInfo.html" title="&lt;TABLE&gt;" alt="" coords="5,5,111,59"/>
+<area shape="rect" id="node4_3" href="./IServiceApi.html" title="com.mycompany.service.api.IServiceApi" alt="" coords="251,11,335,53"/>
+<area shape="rect" id="node4" href="./IServiceApi.html" title="&lt;TABLE&gt;" alt="" coords="240,5,345,59"/>
+</map>

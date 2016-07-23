@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UrbanizationResource.html" title="com.mycompany.service.resources.UrbanizationResource" alt="" coords="16,19,163,45"/>
+<area shape="rect" id="node1" href="./UrbanizationResource.html" title="&lt;TABLE&gt;" alt="" coords="5,8,173,56"/>
+<area shape="rect" id="node2_1" href="./IDefaultResource.html" title="com.mycompany.service.resources.IDefaultResource" alt="" coords="208,11,325,53"/>
+<area shape="rect" id="node2" href="./IDefaultResource.html" title="&lt;TABLE&gt;" alt="" coords="197,5,336,59"/>
+<area shape="rect" id="node3_2" href="./DefaultResource.html" title="com.mycompany.service.resources.DefaultResource" alt="" coords="209,118,324,143"/>
+<area shape="rect" id="node3" href="./DefaultResource.html" title="&lt;TABLE&gt;" alt="" coords="199,107,335,155"/>
+<area shape="rect" id="node4_3" href="./DefaultResource.Builder.html" title="com.mycompany.service.resources.DefaultResource.Builder" alt="" coords="371,19,431,45"/>
+<area shape="rect" id="node4" href="./DefaultResource.Builder.html" title="&lt;TABLE&gt;" alt="" coords="361,8,442,56"/>
+</map>
