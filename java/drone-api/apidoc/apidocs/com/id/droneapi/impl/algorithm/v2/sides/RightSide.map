@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Side.html" title="com.id.droneapi.impl.algorithm.v2.sides.Side" alt="" coords="19,19,64,45"/>
+<area shape="rect" id="node1" href="./Side.html" title="&lt;TABLE&gt;" alt="" coords="5,8,77,56"/>
+<area shape="rect" id="node2_1" href="./RightSide.html" title="com.id.droneapi.impl.algorithm.v2.sides.RightSide" alt="" coords="59,118,135,143"/>
+<area shape="rect" id="node2" href="./RightSide.html" title="&lt;TABLE&gt;" alt="" coords="49,107,146,155"/>
+<area shape="rect" id="node3_2" href="./ISide.html" title="com.id.droneapi.impl.algorithm.v2.sides.ISide" alt="" coords="112,11,195,53"/>
+<area shape="rect" id="node3" href="./ISide.html" title="&lt;TABLE&gt;" alt="" coords="101,5,205,59"/>
+</map>
