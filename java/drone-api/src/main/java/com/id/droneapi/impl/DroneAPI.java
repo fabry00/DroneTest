@@ -2,16 +2,12 @@ package com.id.droneapi.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.id.droneapi.mock.api.DirectionID;
 import com.id.droneapi.INeighborhoodsAlgorithm;
 import com.id.droneapi.IDroneAPI;
 import com.id.droneapi.IScanDirection;
 import com.id.droneapi.mock.api.IUrbanizationID;
 import com.id.droneapi.mock.api.IDealistaAPI;
-import com.id.droneapi.mock.exception.DirectionNotFound;
 import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
-import com.id.droneapi.mock.exception.NoAdjacentNode;
-import com.id.droneapi.mock.exception.NodeNotFound;
 import java.util.Collections;
 
 /**
@@ -51,22 +47,5 @@ public class DroneAPI implements IDroneAPI {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public IUrbanizationID getUrbanizationID(double x, double y)
-            throws NodeNotFound {
-        return this.api.getUrbanizationID(x, y);
-    }
-
-    @Override
-    public IUrbanizationID getAdjacent(String id, String diretcionID)
-            throws NoAdjacentNode, NodeNotFound, DirectionNotFound {
-        return this.api.getAdjacent(id, diretcionID);
-    }
-
-    @Override
-    public IUrbanizationID getAdjacent(IUrbanizationID id, DirectionID diretcionID)
-            throws NoAdjacentNode, NodeNotFound, DirectionNotFound {
-        return this.api.getAdjacent(id, diretcionID);
-    }
 
 }

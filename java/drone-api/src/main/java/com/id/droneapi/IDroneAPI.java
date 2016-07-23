@@ -2,7 +2,6 @@ package com.id.droneapi;
 
 import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
 import com.id.droneapi.mock.api.IUrbanizationID;
-import com.id.droneapi.mock.api.IDealistaAPI;
 import java.util.List;
 
 /**
@@ -10,7 +9,7 @@ import java.util.List;
  *
  * @author Fabrizio Faustinoni
  */
-public interface IDroneAPI extends IDealistaAPI {
+public interface IDroneAPI{
 
     /**
      * Required function.

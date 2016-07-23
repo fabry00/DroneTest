@@ -1,5 +1,6 @@
 package com.mycompany.service;
 
+import com.id.droneapi.mock.UrbanizationMatrixFactory;
 import com.mycompany.commons.health.HealthCheckTask;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -44,8 +45,10 @@ public class UrbanizationApp extends Application<UBConfiguration> {
     }
 
     private Object getDroneResource(final UBConfiguration configuration) {
+
+        UrbanizationMatrixFactory factory = new UrbanizationMatrixFactory();
         UrbanizationResource resource
-                = new UrbanizationResource(configuration);
+                = new UrbanizationResource(configuration, factory);
 
         return resource;
     }

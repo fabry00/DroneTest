@@ -98,6 +98,13 @@ public class UrbanizationMatrix implements IDealistaAPI {
         
         return getNodeWithCoord(coordAdjacent).getId();
     }
+    
+    @Override
+    public IUrbanizationID[][] getUrbanizationMatrix() {
+        return null;
+    }
+    
+    
 
     /**
      * Print the Matrix in a pretty way 

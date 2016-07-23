@@ -59,4 +59,7 @@ public interface IDealistaAPI {
     public IUrbanizationID getAdjacent(IUrbanizationID id, DirectionID diretcionID)
             throws NoAdjacentNode, NodeNotFound,DirectionNotFound;
     
+    
+    public IUrbanizationID[][] getUrbanizationMatrix();
+    
 }
