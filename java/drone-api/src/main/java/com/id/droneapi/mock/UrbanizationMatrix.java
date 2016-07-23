@@ -19,35 +19,35 @@ import com.id.droneapi.mock.direction.DirectionFactory;
 import com.id.droneapi.mock.direction.IDirection;
 
 /**
- * Mocked Urbanization UrbanizationMatrix!
- * This class has been implemented for Testing.
- * It could be improved
- * 
+ * Mocked Urbanization UrbanizationMatrix! This class has been implemented for
+ * Testing. It could be improved
+ *
  * @author Fabrizio Faustinoni
  */
 public class UrbanizationMatrix implements IDealistaAPI {
 
     //! Immutable Map
     private Map<IUrbanizationID, Node> nodes;
-    
+
     //! Matrix rows
     private final int rows;
-    
+
     //! Matrix columns
-    private final int col;
+    private final int cols;
 
     // To create the instance use the Builder
     private UrbanizationMatrix(int rows, int cols) {
         this.rows = rows;
-        this.col = cols;
+        this.cols = cols;
     }
 
     /**
      * Given a node's coordinates return the ID of the node
-     * @param y coordinate Y for the inputNode 
+     *
+     * @param y coordinate Y for the inputNode
      * @param x coordinate X for the inputNode
      * @return the node id
-     * @throws NodeNotFound the exception 
+     * @throws NodeNotFound the exception
      */
     @Override
     public IUrbanizationID getUrbanizationID(double x, double y)
@@ -58,6 +58,7 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Given a node ID and a Direction return the adjacent node
+     *
      * @param id the node id
      * @param diretcionID the direction
      * @return the node id
@@ -76,6 +77,7 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Given a node ID and a Direction return the adjacent node
+     *
      * @param id the node id
      * @param diretcionID the direction
      * @return the node id
@@ -87,20 +89,40 @@ public class UrbanizationMatrix implements IDealistaAPI {
     public IUrbanizationID getAdjacent(IUrbanizationID id, DirectionID diretcionID)
             throws NoAdjacentNode, NodeNotFound, DirectionNotFound {
         IDirection direction = getDirectionImpl(diretcionID);
-        
-        if(!nodes.containsKey(id)) {
+
+        if (!nodes.containsKey(id)) {
             throw new NodeNotFound();
         }
-        
+
         Node sourceNode = nodes.get(id);
-        Coord coordAdjacent 
-                = direction.getAdjacentCoord(sourceNode.getCoord(), col, rows);
-        
+        Coord coordAdjacent
+                = direction.getAdjacentCoord(sourceNode.getCoord(), cols, rows);
+
         return getNodeWithCoord(coordAdjacent).getId();
     }
 
+    @Override
+    public String[][] getUrbanizationMatrix() {
+        String[][] matrix = new String[rows][cols];
+
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < cols; x++) {
+                try {
+                    Node node
+                            = getNodeWithCoord(new Coord((double) x, (double) y));
+                    matrix[y][x] = node.getId().toString();
+                } catch (NodeNotFound ex) {
+                    Logger.getLogger(UrbanizationMatrix.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return matrix;
+    }
+
     /**
-     * Print the Matrix in a pretty way 
+     * Print the Matrix in a pretty way
+     *
      * @return the String
      */
     @Override
@@ -108,7 +130,7 @@ public class UrbanizationMatrix implements IDealistaAPI {
         List<String> lines = new ArrayList<>();
         int maxLengthLine = 0;
         for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < col; x++) {
+            for (int x = 0; x < cols; x++) {
                 try {
                     Node node
                             = getNodeWithCoord(new Coord((double) x, (double) y));
@@ -138,9 +160,10 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Given a node's coordinates return the Node object
+     *
      * @param coord
      * @return
-     * @throws NodeNotFound 
+     * @throws NodeNotFound
      */
     private Node getNodeWithCoord(Coord coord) throws NodeNotFound {
         for (Entry<IUrbanizationID, Node> entry : nodes.entrySet()) {
@@ -154,9 +177,10 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Convert the String directinID in the specific object representation
+     *
      * @param diretcionID
      * @return
-     * @throws DirectionNotFound 
+     * @throws DirectionNotFound
      */
     private DirectionID getDirectionID(String diretcionID)
             throws DirectionNotFound {
@@ -170,14 +194,15 @@ public class UrbanizationMatrix implements IDealistaAPI {
 
     /**
      * Return the Implementation of a DirectionID
+     *
      * @param diretcionID
      * @return
-     * @throws DirectionNotFound 
+     * @throws DirectionNotFound
      */
     private IDirection getDirectionImpl(DirectionID diretcionID)
             throws DirectionNotFound {
         DirectionFactory factory = new DirectionFactory();
-        return factory.createDirection(diretcionID, rows, col);
+        return factory.createDirection(diretcionID, rows, cols);
     }
 
     /**

@@ -8,6 +8,7 @@ import com.id.droneapi.mock.api.IUrbanizationID;
 import com.id.droneapi.mock.Node;
 import com.id.droneapi.mock.UrbanizationID;
 import com.id.droneapi.mock.UrbanizationMatrix;
+import com.id.droneapi.mock.UrbanizationMatrixFactory;
 import com.id.droneapi.mock.exception.DuplicatedAdjacentNode;
 import com.id.droneapi.mock.exception.NodeAlreadyAdded;
 import com.id.droneapi.mock.exception.NodeAlreadyAddedAsAdjacent;
@@ -48,28 +49,11 @@ public class TestHelper {
      * @throws com.id.droneapi.mock.exception.NodeAlreadyAdded
      */
     public IDealistaAPI createUBMatrix(int row, int col) throws NodeAlreadyAddedAsAdjacent, DuplicatedAdjacentNode, NodeAlreadyAdded {
-        UrbanizationMatrix.Builder builder = new UrbanizationMatrix.Builder();
-
-        int id = 1;
-        for (int y = 0; y < row; y++) {
-            for (int x = 0; x < col; x++) {
-                builder.addNode(new Node.Builder()
-                        .withCoords((double) x, (double) y)
-                        .build(getId(id++)));
-            }
-        }
-
-        UrbanizationMatrix g = builder.build(row, col);
-        // Print the Matrix
-        //System.out.println(g.toString());
-
-        IDealistaAPI api = (IDealistaAPI) g;
-
-        return api;
+        return new UrbanizationMatrixFactory().createUBMatrix(row, col);
     }
 
     public UrbanizationID getId(int id) {
-        return new UrbanizationID((id < 10) ? "0" + id : id + "");
+        return new UrbanizationMatrixFactory().getId(id);
     }
 
     public String testToString(IDealistaAPI api, TestCase test, List<IUrbanizationID> actual) {
@@ -77,7 +61,7 @@ public class TestHelper {
         String string = "Test " + test.id + System.getProperty("line.separator");
         string += "InputNode (" + test.starting_node_x + ","
                 + test.starting_node_y + ") range: " + test.range
-                + System.getProperty("line.separator");        
+                + System.getProperty("line.separator");
         string += api + System.getProperty("line.separator");
         string += "Expected: " + test.expected + System.getProperty("line.separator");
         string += "Found: " + actual + System.getProperty("line.separator");

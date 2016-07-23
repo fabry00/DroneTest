@@ -15,7 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>  
-        <mainClass>com.id.droneapp.App</mainClass>      
+        <mainClass>com.id.urbanization.UrbanizationApp</mainClass>      
     </properties>
   
     <url>http://maven.apache.org</url>
