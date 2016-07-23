@@ -60,6 +60,6 @@ public interface IDealistaAPI {
             throws NoAdjacentNode, NodeNotFound,DirectionNotFound;
     
     
-    public IUrbanizationID[][] getUrbanizationMatrix();
+    public String[][] getUrbanizationMatrix();
     
 }

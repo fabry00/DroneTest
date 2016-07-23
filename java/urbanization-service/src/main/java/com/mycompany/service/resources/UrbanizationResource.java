@@ -16,11 +16,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.mycompany.service.IUBConfiguration;
+import com.mycompany.service.api.IServiceApi;
 import java.util.List;
 import java.util.logging.Level;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.core.Response;
 import org.jose4j.json.internal.json_simple.JSONObject;
 import javax.ws.rs.GET;
@@ -30,7 +30,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Path("/" + UrbanizationResource.UB_URL)
+@Path(IServiceApi.BASE + UrbanizationResource.UB_URL)
 @Produces(MediaType.APPLICATION_JSON)
 public class UrbanizationResource {
 
@@ -40,7 +40,7 @@ public class UrbanizationResource {
     //SLF4J is provided with dropwizard
     private final Logger log = LoggerFactory.getLogger(UrbanizationResource.class);
 
-    private UrbanizationMatrixFactory factory;
+    private final UrbanizationMatrixFactory factory;
 
     IUBConfiguration configuration;
 
@@ -56,47 +56,71 @@ public class UrbanizationResource {
     // /taks-list?contains=string
     @Path("/" + GET_NEIGHBORHOODS_URL)
     public JSONObject getNeighborhoods(
-            @QueryParam("rows") @NotEmpty @Min(0) @Max(100) Integer rows,
-            @QueryParam("columns") @NotEmpty @Min(0) @Max(100) Integer columns,
-            @QueryParam("startNodeX") @NotEmpty @Min(0) @Max(100) Double startNodeX,
-            @QueryParam("startNodeY") @NotEmpty @Min(0) @Max(100) Double startNodeY,
-            @QueryParam("range") @NotEmpty @Min(1) @Max(100) Integer range) {
+            @QueryParam("rows") @Min(1) @Max(100) Integer rows,
+            @QueryParam("columns") @Min(1) @Max(100) Integer columns,
+            @QueryParam("startNodeX") @Min(0) @Max(100) Double startNodeX,
+            @QueryParam("startNodeY") @Min(0) @Max(100) Double startNodeY,
+            @QueryParam("range") @Min(1) @Max(100) Integer range) {
 
         JSONObject jo = new JSONObject();
-        try {
 
-            IDealistaAPI apiID = factory.createUBMatrix(rows, columns);
-            INeighborhoodsAlgorithm algorithm = new NeighborhoodsAlgorithmV2();
-            IDroneAPI testDrone = new DroneAPI(apiID, algorithm);
+        IDealistaAPI apiID = getIDApi(rows, columns);
+        String[][] matrix = getUbMatrix(apiID);
 
-            IUrbanizationID[][] matrix = apiID.getUrbanizationMatrix();
-            List<IUrbanizationID> neighs
-                    = testDrone.getNeighborhoods(startNodeX, startNodeY, range);
+        String[] neighs = getNeighborhoods(apiID, startNodeX, startNodeY, range);
 
-            JSONObject data = new JSONObject();
-            data.put("matrix", matrix);
-            data.put("neighborhoods", neighs);
+        JSONObject data = new JSONObject();
+        data.put("matrix", matrix);
+        data.put("neighborhoods", neighs);
 
-            jo.put("data", data);
-            return jo;
-
-        } catch (NodeAlreadyAddedAsAdjacent | DuplicatedAdjacentNode | NodeAlreadyAdded ex) {
-            String message = "Matrix creation error";
-            log.error(message);
-            throw new WebApplicationException(message, Response.Status.INTERNAL_SERVER_ERROR);
-        } catch (NeighborhoodsAlgorithmEx ex) {
-            String message = "Neightborhoos calculation error";
-            log.error(message);
-            throw new WebApplicationException(message, Response.Status.INTERNAL_SERVER_ERROR);
-        }
+        jo.put("data", data);
+        log.info("Return " + jo);
+        return jo;
 
     }
 
-    /*private Process getTasks() throws IOException {
+    private IDealistaAPI getIDApi(int rows, int columns) {
         try {
-            return Runtime.getRuntime().exec("ps -e");
-        } catch (IOException ex) {
-            return Runtime.getRuntime().exec("tasklist");
+            IDealistaAPI apiID = factory.createUBMatrix(rows, columns);
+            return apiID;
+        } catch (NodeAlreadyAddedAsAdjacent | DuplicatedAdjacentNode | NodeAlreadyAdded ex) {
+            log.error("error getUbMatrix", ex);
         }
-    }*/
+
+        String message = "Matrix creation error";
+        log.error(message);
+        throw new WebApplicationException(message, Response.Status.INTERNAL_SERVER_ERROR);
+    }
+
+    private String[] getNeighborhoods(IDealistaAPI apiID,
+            Double startNodeX, Double startNodeY, Integer range) {
+        try {
+            INeighborhoodsAlgorithm algorithm = new NeighborhoodsAlgorithmV2();
+
+            IDroneAPI testDrone = new DroneAPI(apiID, algorithm);
+
+            List<IUrbanizationID> neighs
+                    = testDrone.getNeighborhoods(startNodeX, startNodeY, range);
+
+            String[] response = new String[neighs.size()];
+            int counter = 0;
+            for (IUrbanizationID id : neighs) {
+                response[counter++] = id.toString();
+            }
+            return response;
+
+        } catch (NeighborhoodsAlgorithmEx ex) {
+            log.error("Neightborhoos calculation error", ex);
+        }
+
+        String message = "Neightborhoos calculation error";
+        log.error(message);
+        throw new WebApplicationException(message, Response.Status.INTERNAL_SERVER_ERROR);
+    }
+
+    private String[][] getUbMatrix(IDealistaAPI apiID) {
+        String[][] matrix = apiID.getUrbanizationMatrix();
+        return matrix;
+    }
+
 }
