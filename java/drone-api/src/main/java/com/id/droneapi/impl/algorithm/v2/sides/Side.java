@@ -75,9 +75,6 @@ public abstract class Side {
                     failingAttempts++;
                     found = false;
                     
-                    // Change direction
-                    break;
-
                 }
             }
         }
@@ -125,6 +122,7 @@ public abstract class Side {
             } catch (NoAdjacentNode ex) {
                 logger.log(Level.INFO, "No adjacent node for {0} direction: {1}",
                         new Object[]{currentNode, sideDir});
+                break;
             } catch (NodeNotFound | DirectionNotFound ex) {
                 logger.log(Level.SEVERE, null, ex);
             }

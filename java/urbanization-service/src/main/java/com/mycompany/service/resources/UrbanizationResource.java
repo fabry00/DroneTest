@@ -5,6 +5,8 @@ import com.id.droneapi.IDroneAPI;
 import com.id.droneapi.INeighborhoodsAlgorithm;
 import com.id.droneapi.exception.NeighborhoodsAlgorithmEx;
 import com.id.droneapi.impl.DroneAPI;
+import com.id.droneapi.impl.algorithm.v1.NeighborhoodsAlgorithmV1;
+import com.id.droneapi.impl.algorithm.v1.scandirection.ClockWise;
 import com.id.droneapi.impl.algorithm.v2.NeighborhoodsAlgorithmV2;
 import com.id.droneapi.mock.UrbanizationMatrixFactory;
 import com.id.droneapi.mock.api.IDealistaAPI;
@@ -18,7 +20,6 @@ import javax.ws.rs.core.MediaType;
 import com.mycompany.service.IUBConfiguration;
 import com.mycompany.service.api.IServiceApi;
 import java.util.List;
-import java.util.logging.Level;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.ws.rs.core.Response;
@@ -26,7 +27,6 @@ import org.jose4j.json.internal.json_simple.JSONObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -96,6 +96,8 @@ public class UrbanizationResource {
             Double startNodeX, Double startNodeY, Integer range) {
         try {
             INeighborhoodsAlgorithm algorithm = new NeighborhoodsAlgorithmV2();
+           // INeighborhoodsAlgorithm algorithm = new NeighborhoodsAlgorithmV1(
+           //         new ClockWise());
 
             IDroneAPI testDrone = new DroneAPI(apiID, algorithm);
 

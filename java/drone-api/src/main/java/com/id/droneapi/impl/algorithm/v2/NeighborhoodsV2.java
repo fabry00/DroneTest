@@ -44,9 +44,9 @@ public class NeighborhoodsV2 {
 
     public List<IUrbanizationID> getNodesIDs() {
         List<IUrbanizationID> nodes = new ArrayList<>();
-        for (Node node : getNodes()) {
+        getNodes().stream().forEach((node) -> {
             nodes.add(node.getId());
-        }
+        });
         return Collections.unmodifiableList(nodes);
     }
 
@@ -57,7 +57,7 @@ public class NeighborhoodsV2 {
         SideFactory factory = new SideFactory();
         for (SideType type : SideType.values()) {
 
-            boolean isFirst = (firstSide.equals(type)) ? true : false;
+            boolean isFirst = (firstSide.equals(type));
 
             ISide side = factory.createDirection(type, isFirst);
 
