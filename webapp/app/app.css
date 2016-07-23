@@ -30,18 +30,25 @@
 }
 
 .matrix-container {
-  border: 2px solid;
+  /* border: 2px solid;*/
 }
 
-.matrix-cell {
-  border: 1px solid #CECECE;
+.table-matrix, .matrix-cell {
+  border: 1px solid coral
 }
 
 .startnode {
   background-color: aquamarine;
 }
 
+.currentpos {
+  background-color: chocolate !important;
+}
 .commands {
   border-left: 1px solid black;
   padding-left: 2px;
+}
+
+.neighbor {
+  background-color: cornflowerblue;
 }

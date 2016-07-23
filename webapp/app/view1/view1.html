@@ -1,56 +1,79 @@
 <div class="jumbotron">
     <h3 class="text-center">DroneTest</h3>
     <div class="container">
-        <div class="col-md-9">
-            <div ng-if="matrix.length > 0" class=" matrix-container">
-                <h4 class="text-center">Urbanization matrix</h4>
-                <ul>
-                    <li><span class="startnode">STARTING NODE</span></li>
-                </ul>
-                <div class="table-responsive">
-                    <table class="table">
-                        <tbody>
-                            <tr ng-repeat="rows in matrix" class="matrix-row">
-                                <td ng-repeat="item in rows" ng-class="startNodeX == $parent.$index && startNodeY == $index ? 'matrix-cell text-center startnode' : 'matrix-cell text-center'">
-                                    {{item}} ({{$parent.$index}},{{$index}})
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <button class="btn btn-primary" ng-click="startDrone()">
-                    Start drone
-                </button>
-            </div>
+        <div class="row">
             <div class="alert alert-danger" role="alert" ng-if="error">{{error}}</div>
+            DRONE STATUS:
+            <div class="alert alert-danger" role="alert" ng-if="!droneconnected">
+                <span class="glyphicon glyphicon-align-left" aria-hidden="true">
+                    DISCONNECTED (check nodejs service at port 3001)
+                </span>
+            </div>
+            <div class="alert alert-success" role="alert" ng-if="droneconnected">
+                <span class="glyphicon glyphicon-align-left" aria-hidden="true">
+                    CONNECTED - <span>{{dronestatus}}</span>
+                </span>
+            </div>
+
         </div>
-        <div class="col-md-3 commands">
-            <form name="myForm" role="search">
-                <div class="form-group">
-                    <label for="rows">MATRIX ROWS:</label>
-                    <input name="rows" ng-model="rows" required type="number" min="1" max="100" class="form-control" placeholder="matrix rows">
+        <div class="row">
+            <div class="col-md-9">
+                <div ng-if="matrix.length > 0" class=" matrix-container">
+                    <h4 class="text-center">Urbanization matrix</h4>
+                    <ul>
+                        <li><span class="startnode">STARTING NODE</span></li>
+                        <li><span class="currentpos">CURRENT DRONE POSITION</span></li>
+                        <li><span class="neighbor">NEIGHBORHOOD</span></li>
 
-                    <label for="cols">MATRIX COLUMNS:</label>
-                    <input name="cols" ng-model="cols" required type="number" min="1" max="100" class="form-control" placeholder="matrix columns">
-                </div>
-                <div class="form-group">
-                    <label for="startNodeX">STARTING NODE X:</label>
-                    <input name="startNodeX" ng-model="startNodeX" type="number" min="0" max="100" class="form-control" placeholder="start node x">
-
-                    <label for="startNodeY">STARTING NODE Y:</label>
-                    <input name="startNodeY" ng-model="startNodeY" type="number" min="0" max="100" class="form-control" placeholder="start node y">
-
-                    <label for="range">RANGE:</label>
-                    <input name="range" ng-model="range" type="number" min="1" max="100" class="form-control" placeholder="range">
-                </div>
-                <div class="form-group">
-
-                    <button type="submit" class="btn btn-primary" ng-click="getNeighborHoods()">
-                        Get Neighborhoods
+                    </ul>
+                    <div class="table-responsive">
+                        <table class="table table-matrix">
+                            <tbody>
+                                <tr ng-repeat="rows in matrix" class="matrix-row">
+                                    <td ng-repeat="item in rows" ng-class="{'neighbor': neighborhoods.indexOf(item) != -1, 'startnode': startNodeX == $index && startNodeY == $parent.$index,'currentpos': droneposition.x == $parent.$index && droneposition.y == $index,'matrix-cell text-center' : 1==1}">
+                                        {{item}} ({{$index}},{{$parent.$index}})
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button ng-disabled="disabled"  type="submit" class="btn btn-primary btn-lg" ng-click="startDrone()">
+                    Start drone
                     </button>
                 </div>
-            </form>
+
+            </div>
+            <div class="col-md-3 commands">
+                <form name="myForm" role="search">
+                    <div class="form-group">
+                        <label for="rows">MATRIX ROWS:</label>
+                        <input ng-disabled="disabled" name="rows" ng-model="rows" required type="number" min="1" max="100" class="form-control" placeholder="matrix rows">
+
+                        <label for="cols">MATRIX COLUMNS:</label>
+                        <input ng-disabled="disabled" name="cols" ng-model="cols" required type="number" min="1" max="100" class="form-control" placeholder="matrix columns">
+                    </div>
+                    <div class="form-group">
+                        <label for="startNodeX">STARTING NODE X:</label>
+                        <input ng-disabled="disabled" name="startNodeX" ng-model="startNodeX" type="number" min="0" max="100" class="form-control"
+                            placeholder="start node x">
+
+                        <label for="startNodeY">STARTING NODE Y:</label>
+                        <input ng-disabled="disabled" name="startNodeY" ng-model="startNodeY" type="number" min="0" max="100" class="form-control"
+                            placeholder="start node y">
+
+                        <label for="range">RANGE:</label>
+                        <input ng-disabled="disabled" name="range" ng-model="range" type="number" min="1" max="100" class="form-control" placeholder="range">
+                    </div>
+                    <div class="form-group">
+
+                        <button ng-disabled="disabled" type="submit" class="btn btn-primary" ng-click="getNeighborHoods()">
+                        Get Neighborhoods
+                    </button>
+                    </div>
+                </form>
+            </div>
         </div>
+
 
     </div>
 </div>
