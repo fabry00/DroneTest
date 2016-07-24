@@ -1,13 +1,21 @@
-angular.module('myApp.systeminfo', []).
-  factory('systeminfo', function ($http, $q) {
+angular.module('myApp.urbanizationservice', []).
+  factory('urbanizationservice', function ($http, $q) {
 
-    var BASE = "http://localhost:9080/api/v1/system-";  
+    var BASE = "http://localhost:9082/api/v1/ub/";
     var api = {};
 
-    api.getSystemStatus = function () {
+    api.getNeighborHoods = function (rows,cols,startNodeX,startNodeY,range) {
       var request = $http({
+        cache: false,
         method: "get",
-        url: BASE + 'status',        
+        url: BASE + 'neighborhoods',
+        params: {
+          rows: rows,
+          columns: cols,
+          startNodeX: startNodeX,
+          startNodeY: startNodeY,
+          range: range
+        },
       });
       return (request.then(handleSuccess, handleError));
     }

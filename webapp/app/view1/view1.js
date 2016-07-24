@@ -9,8 +9,8 @@ angular.module('myApp.view1', ['ngRoute', 'ui.bootstrap'])
     });
   }])
 
-  .controller('View1Ctrl', ['$scope', 'taskservice', 'systeminfo', 'socket',
-    function ($scope, taskservice, systeminfo, socket) {
+  .controller('View1Ctrl', ['$scope', 'urbanizationservice', 'socket',
+    function ($scope, urbanizationservice, socket) {
 
       console.log("ViewControl");
       $scope.rows = 7;
@@ -43,7 +43,7 @@ angular.module('myApp.view1', ['ngRoute', 'ui.bootstrap'])
           console.error("Input params not valid");
           return;
         }
-        taskservice.getNeighborHoods($scope.rows, $scope.cols,
+        urbanizationservice.getNeighborHoods($scope.rows, $scope.cols,
           $scope.startNodeX, $scope.startNodeY, $scope.range).then(
           function (info) {
             console.log(info.data);
