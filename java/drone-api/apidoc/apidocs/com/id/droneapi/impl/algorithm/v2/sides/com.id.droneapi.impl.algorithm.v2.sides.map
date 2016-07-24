@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UpSide.html" title="com.id.droneapi.impl.algorithm.v2.sides.UpSide" alt="" coords="261,118,323,143"/>
+<area shape="rect" id="node1" href="./UpSide.html" title="&lt;TABLE&gt;" alt="" coords="251,107,333,155"/>
+<area shape="rect" id="node2_1" href="./SideFactory.html" title="com.id.droneapi.impl.algorithm.v2.sides.SideFactory" alt="" coords="377,19,466,45"/>
+<area shape="rect" id="node2" href="./SideFactory.html" title="&lt;TABLE&gt;" alt="" coords="366,8,477,56"/>
+<area shape="rect" id="node3_2" href="./Side.html" title="com.id.droneapi.impl.algorithm.v2.sides.Side" alt="" coords="151,19,196,45"/>
+<area shape="rect" id="node3" href="./Side.html" title="&lt;TABLE&gt;" alt="" coords="137,8,209,56"/>
+<area shape="rect" id="node4_3" href="./RightSide.html" title="com.id.droneapi.impl.algorithm.v2.sides.RightSide" alt="" coords="369,118,445,143"/>
+<area shape="rect" id="node4" href="./RightSide.html" title="&lt;TABLE&gt;" alt="" coords="358,107,455,155"/>
+<area shape="rect" id="node5_4" href="./LeftSide.html" title="com.id.droneapi.impl.algorithm.v2.sides.LeftSide" alt="" coords="16,118,83,143"/>
+<area shape="rect" id="node5" href="./LeftSide.html" title="&lt;TABLE&gt;" alt="" coords="5,107,93,155"/>
+<area shape="rect" id="node8_5" href="./BottomSide.html" title="com.id.droneapi.impl.algorithm.v2.sides.BottomSide" alt="" coords="128,118,216,143"/>
+<area shape="rect" id="node8" href="./BottomSide.html" title="&lt;TABLE&gt;" alt="" coords="117,107,227,155"/>
+<area shape="rect" id="node6_6" href="./ISide.html" title="com.id.droneapi.impl.algorithm.v2.sides.ISide" alt="" coords="248,11,331,53"/>
+<area shape="rect" id="node6" href="./ISide.html" title="&lt;TABLE&gt;" alt="" coords="237,5,341,59"/>
+<area shape="rect" id="node7_7" href="./ISide.SideType.html" title="com.id.droneapi.impl.algorithm.v2.sides.ISide.SideType" alt="" coords="512,11,616,53"/>
+<area shape="rect" id="node7" href="./ISide.SideType.html" title="&lt;TABLE&gt;" alt="" coords="501,5,627,59"/>
+</map>
