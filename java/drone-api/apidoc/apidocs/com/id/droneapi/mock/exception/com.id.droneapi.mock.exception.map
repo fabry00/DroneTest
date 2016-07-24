@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./NodeNotFound.html" title="com.id.droneapi.mock.exception.NodeNotFound" alt="" coords="16,17,121,42"/>
+<area shape="rect" id="node1" href="./NodeNotFound.html" title="&lt;TABLE&gt;" alt="" coords="5,5,132,53"/>
+<area shape="rect" id="node2_1" href="./NodeAlreadyAddedAsAdjacent.html" title="com.id.droneapi.mock.exception.NodeAlreadyAddedAsAdjacent" alt="" coords="167,17,365,42"/>
+<area shape="rect" id="node2" href="./NodeAlreadyAddedAsAdjacent.html" title="&lt;TABLE&gt;" alt="" coords="157,5,375,53"/>
+<area shape="rect" id="node3_2" href="./NodeAlreadyAdded.html" title="com.id.droneapi.mock.exception.NodeAlreadyAdded" alt="" coords="410,17,541,42"/>
+<area shape="rect" id="node3" href="./NodeAlreadyAdded.html" title="&lt;TABLE&gt;" alt="" coords="399,5,551,53"/>
+<area shape="rect" id="node4_3" href="./NoAdjacentNode.html" title="com.id.droneapi.mock.exception.NoAdjacentNode" alt="" coords="587,17,703,42"/>
+<area shape="rect" id="node4" href="./NoAdjacentNode.html" title="&lt;TABLE&gt;" alt="" coords="576,5,713,53"/>
+<area shape="rect" id="node5_4" href="./DuplicatedAdjacentNode.html" title="com.id.droneapi.mock.exception.DuplicatedAdjacentNode" alt="" coords="748,17,909,42"/>
+<area shape="rect" id="node5" href="./DuplicatedAdjacentNode.html" title="&lt;TABLE&gt;" alt="" coords="737,5,920,53"/>
+<area shape="rect" id="node6_5" href="./DirectionNotFound.html" title="com.id.droneapi.mock.exception.DirectionNotFound" alt="" coords="955,17,1081,42"/>
+<area shape="rect" id="node6" href="./DirectionNotFound.html" title="&lt;TABLE&gt;" alt="" coords="944,5,1092,53"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./IScanDirection.html" title="com.id.droneapi.IScanDirection" alt="" coords="16,11,120,53"/>
+<area shape="rect" id="node1" href="./IScanDirection.html" title="&lt;TABLE&gt;" alt="" coords="5,5,131,59"/>
+<area shape="rect" id="node2_1" href="./INeighborhoodsAlgorithm.html" title="com.id.droneapi.INeighborhoodsAlgorithm" alt="" coords="166,11,330,53"/>
+<area shape="rect" id="node2" href="./INeighborhoodsAlgorithm.html" title="&lt;TABLE&gt;" alt="" coords="155,5,341,59"/>
+<area shape="rect" id="node3_2" href="./IDroneAPI.html" title="com.id.droneapi.IDroneAPI" alt="" coords="376,11,459,53"/>
+<area shape="rect" id="node3" href="./IDroneAPI.html" title="&lt;TABLE&gt;" alt="" coords="365,5,469,59"/>
+</map>

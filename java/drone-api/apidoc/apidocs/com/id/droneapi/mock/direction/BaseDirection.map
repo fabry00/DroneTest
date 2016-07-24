@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UpDirection.html" title="com.id.droneapi.mock.direction.UpDirection" alt="" coords="16,214,103,239"/>
+<area shape="rect" id="node1" href="./UpDirection.html" title="&lt;TABLE&gt;" alt="" coords="5,203,113,251"/>
+<area shape="rect" id="node2_1" href="./RightDirection.html" title="com.id.droneapi.mock.direction.RightDirection" alt="" coords="148,214,248,239"/>
+<area shape="rect" id="node2" href="./RightDirection.html" title="&lt;TABLE&gt;" alt="" coords="137,203,259,251"/>
+<area shape="rect" id="node3_2" href="./LeftDirection.html" title="com.id.droneapi.mock.direction.LeftDirection" alt="" coords="293,214,385,239"/>
+<area shape="rect" id="node3" href="./LeftDirection.html" title="&lt;TABLE&gt;" alt="" coords="283,203,396,251"/>
+<area shape="rect" id="node4_3" href="./IDirection.html" title="com.id.droneapi.mock.direction.IDirection" alt="" coords="222,11,305,53"/>
+<area shape="rect" id="node4" href="./IDirection.html" title="&lt;TABLE&gt;" alt="" coords="211,5,315,59"/>
+<area shape="rect" id="node5_4" href="./DownDirection.html" title="com.id.droneapi.mock.direction.DownDirection" alt="" coords="431,214,533,239"/>
+<area shape="rect" id="node5" href="./DownDirection.html" title="&lt;TABLE&gt;" alt="" coords="420,203,544,251"/>
+<area shape="rect" id="node6_5" href="./BaseDirection.html" title="com.id.droneapi.mock.direction.BaseDirection" alt="" coords="213,118,313,143"/>
+<area shape="rect" id="node6" href="./BaseDirection.html" title="&lt;TABLE&gt;" alt="" coords="203,107,324,155"/>
+</map>
