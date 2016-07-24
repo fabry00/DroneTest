@@ -18,10 +18,12 @@ angular.module('myApp.view1', ['ngRoute', 'ui.bootstrap'])
       $scope.startNodeX = 3;
       $scope.startNodeY = 3;
       $scope.range = 2;
+      $scope.loading = false;
       $scope.droneconnected = false;
       $scope.dronestatus = "STOPPED";
       $scope.droneposition = { x: -1, y: -1 };
       $scope.matrix = [];
+      $scope.pools = [];
       $scope.neighborhoods = [];
       $scope.disabled = false;
 
@@ -37,7 +39,10 @@ angular.module('myApp.view1', ['ngRoute', 'ui.bootstrap'])
 
       function getNeighborHoods() {
         $scope.error = "";
+        $scope.loading = true;
+        $scope.disabled = true;
         $scope.droneposition = { x: -1, y: -1 };
+        $scope.pools = [];
         console.log("getNeighborHoods " + $scope.myForm.$valid);
         if (!$scope.myForm.$valid) {
           console.error("Input params not valid");
@@ -49,24 +54,15 @@ angular.module('myApp.view1', ['ngRoute', 'ui.bootstrap'])
             console.log(info.data);
             $scope.matrix = info.data.matrix;
             $scope.neighborhoods = info.data.neighborhoods;
+            $scope.loading = false;
+            $scope.disabled = false;
           }, function (reason) {
             handleError("NeighborHoods " + reason);
+            $scope.loading = false;
+            $scope.disabled = false;
           }
           );
       }
-
-      function checkSystemStatus() {
-        systeminfo.getSystemStatus().then(
-          function (info) {
-            console.log(info.data);
-            $scope.status = info.data;
-            console.log($scope.status);
-          }, function (reason) {
-            handleError("SytemInfo " + reason);
-          }
-        );
-      }
-
 
       function handleError(reason) {
         $scope.error = reason;
@@ -75,38 +71,40 @@ angular.module('myApp.view1', ['ngRoute', 'ui.bootstrap'])
       function startDrone() {
         console.log("START");
         $scope.droneposition = { x: -1, y: -1 };
+        $scope.pools = [];
         socket.emit('drone:start', {
           matrix: $scope.matrix,
           neighs: $scope.neighborhoods
         });
       }
 
-      socket.on('drone:position', function (message) {        
-        $scope.droneposition = message;
-        console.log($scope.droneposition);
-      });
+      socket.on('drone:position', function (message) {
+        console.log(message);
+        $scope.droneposition = message.position;
+        if (message.pool) {
+          console.log("Pool found");
+          $scope.pools.push(message.node);
+          console.log("POOL FOUND IN NODE: " + message.node);
+        }
 
-      socket.on('position', function (data) {
-        console.log("Drone new position");
-        console.log(data);
       });
 
       socket.on('dronestatus', function (data) {
-        console.log("Drone new status "+data);
-        var status = data;
+        console.log("Drone new status " + data);
+        var status = data.status;
         $scope.dronestatus = status;
+       // $scope.matrix = data.matrix;
         if (status == "MOVING") {
           $scope.disabled = true;
-        } else{
-           $scope.disabled = false;
+        } else {
+          $scope.disabled = false;
         }
         console.log(data);
       });
 
-      socket.on('connect', function () {
+      socket.on('connect', function (message) {
         console.log("drone connected");
         $scope.droneconnected = true;
-
       });
 
       socket.on('disconnect', function () {

@@ -2,6 +2,7 @@
     <h3 class="text-center">DroneTest</h3>
     <div class="container">
         <div class="row">
+            <div class="alert alert-warning" role="alert" ng-if="loading">LOADING...please wait</div>
             <div class="alert alert-danger" role="alert" ng-if="error">{{error}}</div>
             DRONE STATUS:
             <div class="alert alert-danger" role="alert" ng-if="!droneconnected">
@@ -24,13 +25,13 @@
                         <li><span class="startnode">STARTING NODE</span></li>
                         <li><span class="currentpos">CURRENT DRONE POSITION</span></li>
                         <li><span class="neighbor">NEIGHBORHOOD</span></li>
-
+                        <li><span class="pool">NODE HAS POOL</span></li>
                     </ul>
                     <div class="table-responsive">
                         <table class="table table-matrix">
                             <tbody>
                                 <tr ng-repeat="rows in matrix" class="matrix-row">
-                                    <td ng-repeat="item in rows" ng-class="{'neighbor': neighborhoods.indexOf(item) != -1, 'startnode': startNodeX == $index && startNodeY == $parent.$index,'currentpos': droneposition.x == $parent.$index && droneposition.y == $index,'matrix-cell text-center' : 1==1}">
+                                    <td ng-repeat="item in rows" ng-class="{'neighbor': neighborhoods.indexOf(item) != -1, 'startnode': startNodeX == $index && startNodeY == $parent.$index,'pool': pools.indexOf(item) != -1,'currentpos': droneposition.x == $parent.$index && droneposition.y == $index, 'matrix-cell text-center' : 1==1}">
                                         {{item}} ({{$index}},{{$parent.$index}})
                                     </td>
                                 </tr>

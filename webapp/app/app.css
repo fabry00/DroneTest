@@ -44,6 +44,9 @@
 .currentpos {
   background-color: chocolate !important;
 }
+.pool{
+  background-color: yellowgreen !important;
+}
 .commands {
   border-left: 1px solid black;
   padding-left: 2px;

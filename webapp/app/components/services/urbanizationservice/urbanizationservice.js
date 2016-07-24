@@ -1,7 +1,7 @@
 angular.module('myApp.urbanizationservice', []).
   factory('urbanizationservice', function ($http, $q) {
 
-    var BASE = "http://localhost:9082/api/v1/ub/";
+    var BASE = "http://fausty.ddns.net:9082/api/v1/ub/";
     var api = {};
 
     api.getNeighborHoods = function (rows,cols,startNodeX,startNodeY,range) {

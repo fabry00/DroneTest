@@ -6,13 +6,23 @@ app.get('/', function (req, res) {
     res.sendfile('index.html');
 });
 
+var droneStatus = "STOPPED";
+var matrix = [];
 io.on('connection', function (socket) {
     console.log('a user connected');
+    socket.emit('dronestatus', {
+        status: droneStatus,
+        matrix: matrix
+    });
 
     socket.on('drone:start', function (data) {
         console.log("start drone");
         console.log(data.neighs);
-        socket.emit('dronestatus', "MOVING");
+        droneStatus = "MOVING";
+        socket.emit('dronestatus', {
+            status: droneStatus,
+            matrix: matrix
+        });
         var counter = 1;
         var sent = 0;
         var coordinates = [];
@@ -28,22 +38,31 @@ io.on('connection', function (socket) {
 
                     if (data.matrix[row][col] == node) {
                         console.log("Node: " + node + " new position: " + x + "," + y);
-                        
-                        setTimeout(function (cordx, cordy) {
+
+                        setTimeout(function (cordx, cordy, mynode) {
+                            var pool = (Math.floor((Math.random() * 100) + 1)) > 70 ? true : false;
                             socket.emit('drone:position', {
-                                x: cordx,
-                                y: cordy
+                                position: {
+                                    x: cordx,
+                                    y: cordy
+                                },
+                                pool: pool,
+                                node: mynode
                             });
                             sent++;
                             if (sent >= data.neighs.length) {
-                                socket.emit('dronestatus', "STOPPED");
+                                droneStatus = "STOPPED";
+                                socket.emit('dronestatus', {
+                                    status: droneStatus,
+                                    matrix: matrix
+                                });
                             }
-                        }, counter * 1000, x, y);
+                        }, counter * 1000, x, y, node);
                         counter++;
                         found = true;
                         break;
                     }
-                   y++;
+                    y++;
                 }
                 x++;
                 y = 0;
