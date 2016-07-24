@@ -5,10 +5,8 @@ angular.module('myApp', [
   'ui.bootstrap',
   'ngRoute',
   'myApp.view1',
-  'myApp.view2',
   'myApp.version',
-  'myApp.taskservice',
-  'myApp.systeminfo',
+  'myApp.urbanizationservice',
   'myApp.socket'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
